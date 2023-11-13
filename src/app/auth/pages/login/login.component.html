@@ -1,0 +1,26 @@
+<div id="contenedorcentrado">
+    <div id="login">
+        <form id="loginform" [formGroup]="myForm" (ngSubmit)="login()">
+            <label for="email">Email</label>
+            <input id="email" type="text" formControlName="email" placeholder="Email" required>
+            
+            <label for="password">Contraseña</label>
+            <input id="password" type="password" placeholder="Contraseña" formControlName="password" required>
+            
+            <button type="submit" [disabled]="myForm.invalid">Login</button>
+        </form>
+        
+    </div>
+    <div id="derecho">
+        <div class="titulo">
+            Bienvenido
+        </div>
+        <hr>
+        <div class="pie-form">
+            <a href="#">¿Olvidaste tu contraseña?</a>
+            <a routerLink="/auth/register">¿No tienes Cuenta? Registrate</a>
+            <hr>
+            <a href="#">« Volver</a>
+        </div>
+    </div>
+</div>

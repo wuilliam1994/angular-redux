@@ -1,0 +1,26 @@
+<div id="contenedorcentrado">
+    <div id="register">
+        <form id="registerform" [formGroup]="myForm" (ngSubmit)="register()">
+            <label for="usuario">Usuario</label>
+            <input id="usuario" type="text" formControlName="username" placeholder="Usuario" required>
+
+            <label for="email">Email</label>
+            <input id="email" type="text" formControlName="email" placeholder="Email" required>
+            
+            <label for="password">Contraseña</label>
+            <input id="password" type="password" placeholder="Contraseña" formControlName="password" required>
+            
+            <button type="submit" title="Ingresar" name="Ingresar">Register</button>
+        </form>
+        
+    </div>
+    <div id="derecho">
+        <div class="titulo">
+            Bienvenido
+        </div>
+        <hr>
+        <div class="pie-form">
+            <a routerLink="/auth/login">« Volver</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    
+    <span class="text-h1">Dashboard</span>
+    <span class="example-spacer"></span>
+    <button mat-button routerLink="/home/house">House</button>
+    <button mat-button routerLink="/home/table">Table</button>
+    <button mat-button routerLink="/home/account">Account</button>
+    <button mat-button routerLink="/home/house">House</button>
+    <button mat-button routerLink="/home/menu">Menu</button>
+    <button mat-button routerLink="/home/table">Table</button>
+    <span class="example-spacer"></span>
+    <button mat-button (click)="logout()">
+      <span>Logout</span>
+      <mat-icon>logout</mat-icon>
+    </button>
+   
+  </mat-toolbar>
+
+  <router-outlet></router-outlet>
+
+<!-- <p>Esta pagina funciona si estas autenticado</p>
+
+<pre>{{ user | json }}</pre>
+
+<button (click)="logout()">Logout</button> -->
