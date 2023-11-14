@@ -11,6 +11,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { EditHouseDialogComponent } from './components/dialog/edit-house-dialog/edit-house-dialog.component';
 import { AngularMaterialModule } from './angular-material.module';
+import { DataTableComponent } from './shared/data-table/data-table.component';
 
 
 
@@ -23,6 +24,7 @@ import { AngularMaterialModule } from './angular-material.module';
     CategoryComponent,
     MenuComponent,
     EditHouseDialogComponent,
+    DataTableComponent
   ],
   imports: [
     CommonModule,
