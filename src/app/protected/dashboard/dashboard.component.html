@@ -11,14 +11,30 @@
     <span class="text-h1">Dashboard</span>
     <span class="example-spacer"></span>
 
-    <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button> -->
-    <!-- <mat-menu #menu="matMenu"> -->
+    <div *ngIf="!showMenu">
       <button mat-button routerLink="/home/house">House</button>
       <button mat-button routerLink="/home/table">Table</button>
       <button mat-button routerLink="/home/account">Account</button>
       <button mat-button routerLink="/home/house">House</button>
       <button mat-button routerLink="/home/menu">Menu</button>
       <button mat-button routerLink="/home/table">Table</button>
+    </div>
+      
+
+    <button mat-icon-button *ngIf="showMenu" [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-button routerLink="/home/house">House</button>
+      <button mat-button routerLink="/home/table">Table</button>
+      <button mat-button routerLink="/home/account">Account</button>
+      <button mat-button routerLink="/home/house">House</button>
+      <button mat-button routerLink="/home/menu">Menu</button>
+      <button mat-button routerLink="/home/table">Table</button>
+    </mat-menu>
+
+      
     <!-- </mat-menu> -->
     <span class="example-spacer"></span>
     <button mat-button (click)="logout()">

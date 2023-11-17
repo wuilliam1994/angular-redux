@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { HouseService } from '../services/house.service';
@@ -14,6 +14,13 @@ import { Observable, of } from 'rxjs';
 
 })
 export class DashboardComponent {
+  showMenu = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.showMenu = window.innerWidth < 1000;
+    console.log(this.showMenu);
+  }
   constructor(private authService: AuthService, private houseService: HouseService){
 
   }
@@ -26,32 +33,4 @@ export class DashboardComponent {
   logout(){
     this.authService.logout();
   }
- 
-  // listHouses(){
-  //   this.houseService.listHouses().subscribe({
-  //     next: (resp) => {
-  //       if (resp?.status === 200) {
-  //         this.elementsTable = resp.data["house"];
-  //         this.showHouse = true;
-  //       }
-  //     },
-  //     error: (err) => {
-  //       return err;
-  //     },
-  //   });
-  // }
-
-
-  // listHouses(): Observable<House[]> {
-  //   return this.houseService.listHouses().subscribe({
-  //     next: (result) => {
-  //       if (result?.status === 200) {
-  //         return result.data["house"] as House[];
-  //       } else {
-  //         throw new Error('Error al obtener los datos de las casas');
-  //       }
-  //     }
-  //   })
-      
-  //   )};
 }

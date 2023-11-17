@@ -1,17 +1,36 @@
 table {
-    width: 100%;
-  }
-  
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 20%;
-    margin-top: 0.5%;
-  }
-  
-  td, th {
-    width: 25%;
-  }
+  width: 100%;
+}
 
-  .btnAdd {
-    align-items: end;
-  }
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+button {
+  margin-left: 10px;
+}
+
+.mat-tooltip {
+  font-size: 5px !important;
+}
+.mat-mdc-form-field {
+  margin-top: 5px;
+  font-size: 14px;
+  width: 100%;
+}
+
+::ng-deep .mat-tooltip {
+  font-size: 15px
+}
+
+
+.paginator {
+  border-top: 1px solid #e0e0e0;
+  font-size: 15px !important; 
+}

@@ -1,7 +1,7 @@
-  <div class="containerHouse">
-      <mat-toolbar id = "matToolbarHouse">
-        <span>House</span>
-      </mat-toolbar>
+<div class="containerHouse">
+  <mat-toolbar id="matToolbarHouse">
+    <span>House</span>
+  </mat-toolbar>
 
-      <app-data-table></app-data-table>
-  </div>
+  <app-data-table [houses]="houseDataService.getListHouse" [listHeaders] = "listHouseHeaders"></app-data-table>
+</div>
