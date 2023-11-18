@@ -17,6 +17,7 @@ export class HouseModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: House,
     private fb: FormBuilder
   ) {
+    console.log(this.data)
     this.form = this.fb.group({
       name: [data.name || '', Validators.required],
       tables: [data.cantTables || '', Validators.required],
@@ -27,6 +28,10 @@ export class HouseModalComponent {
     if (this.form.valid) {
       this.dialogRef.close(this.form.value);
     }
+  }
+
+  cancel(){
+    this.dialogRef.close();
   }
 
 }

@@ -13,6 +13,7 @@ import { EditHouseDialogComponent } from './components/dialog/edit-house-dialog/
 import { AngularMaterialModule } from './angular-material.module';
 import { DataTableComponent } from './shared/data-table/data-table.component';
 import { HouseModalComponent } from './shared/house-modal/house-modal.component';
+import { GenericModalEditComponent } from './shared/generic-modal-edit/generic-modal-edit.component';
 
 
 
@@ -26,7 +27,8 @@ import { HouseModalComponent } from './shared/house-modal/house-modal.component'
     MenuComponent,
     EditHouseDialogComponent,
     DataTableComponent,
-    HouseModalComponent
+    HouseModalComponent,
+    GenericModalEditComponent
   ],
   imports: [
     CommonModule,

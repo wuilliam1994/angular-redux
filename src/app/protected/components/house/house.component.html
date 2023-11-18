@@ -3,5 +3,5 @@
     <span>House</span>
   </mat-toolbar>
 
-  <app-data-table [houses]="houseDataService.getListHouse" [listHeaders] = "listHouseHeaders"></app-data-table>
+  <app-data-table [data]="houseDataService.getListHouse" [listHeaders] = "columnHeader" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-data-table>
 </div>

@@ -32,7 +32,6 @@ export class AuthService {
         if (resp.status === 200 ) {
           this._user = resp.body?.data?.user!
           this.cookieService.set('token', resp.body?.data.token!);
-          console.log(resp);
         }
       }),
       map(resp => resp.body)

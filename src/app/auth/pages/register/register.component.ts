@@ -24,7 +24,6 @@ export class RegisterComponent {
       next: (resp) => {
         if (resp!.status === 200) {
           const token = document.cookie.trim().split('=')[1];
-          console.log(token);
           this.router.navigateByUrl("/home");
         }
       },

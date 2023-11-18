@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { HouseService } from '../services/house.service';
+import { HouseService } from '../services/house/house.service';
 import { House } from '../interfaces/house.interface';
 import { Observable, of } from 'rxjs';
 
@@ -19,7 +19,6 @@ export class DashboardComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
     this.showMenu = window.innerWidth < 1000;
-    console.log(this.showMenu);
   }
   constructor(private authService: AuthService, private houseService: HouseService){
 

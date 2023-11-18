@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { House } from '../interfaces/house.interface';
+import { House } from '../../interfaces/house.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({

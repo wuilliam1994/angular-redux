@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { House, IHouse } from '../interfaces/house.interface';
+import { House, IHouse } from '../../interfaces/house.interface';
 import { environment } from 'src/environments/environments';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, tap, Observable, of, catchError, throwError, filter} from "rxjs";
+import { map } from "rxjs";
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -30,26 +30,8 @@ export class HouseService {
     );
   }
 
-  // listHouses(): Observable<IHouse> {
-  //   const token = this.cookieService.get('token');
-  //   const url = `${this.baseUrl}/house/list`;
-  
-  //   const headers = new HttpHeaders({
-  //     'token': `${token}`
-  //   });
-  
-  //   return this.http.get<IHouse>(url, { 
-  //     headers, 
-  //     observe: 'response', 
-  //     responseType: 'json',
-  //    }).pipe(
-  //      map(resp => resp.body),
-  //      filter(data => data !== null)
-  //    );
-  // }
 
   editHouse(house: House){
-    // console.log(house);
 
     const token = this.cookieService.get('token');
     const url = `${this.baseUrl}/house/edit/${house._id}`;
@@ -70,7 +52,8 @@ export class HouseService {
      })
     .pipe(
       map(resp => {
-        return resp;
+
+        // return resp;
       })      
     );
   }

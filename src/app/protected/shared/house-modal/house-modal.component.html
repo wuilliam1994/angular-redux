@@ -1,5 +1,5 @@
 <div mat-dialog-content>
-    <form [formGroup]="form" (ngSubmit)="save()">
+    <form [formGroup]="form">
         <mat-form-field>
           <mat-label>Name the House</mat-label>
           <input matInput formControlName="name">
@@ -9,8 +9,8 @@
           <input matInput formControlName="tables">
         </mat-form-field>
         <div mat-dialog-actions>
-          <button mat-button >No Thanks</button>
-          <button mat-button  cdkFocusInitial>Ok</button>
+          <button mat-button (click)="cancel()" >Cancel</button>
+          <button mat-button (click)="save()" cdkFocusInitial>Add</button>
         </div>
     </form>
   </div>

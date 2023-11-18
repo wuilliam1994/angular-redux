@@ -1,53 +1,40 @@
-<mat-form-field >
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-</mat-form-field>
-<div class="mat-elevation-z5 demo-table">
+<div class="mat-elevation-z8 demo-table">
+  <!-- Campo de entrada para filtrar los datos de la tabla -->
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filtro">
+  </mat-form-field>
+  <!-- Tabla que muestra los datos -->
   <table mat-table [dataSource]="dataSource" matSort>
-    <ng-container
-      [matColumnDef]="column.columnDef"
-      *ngFor="let column of columns"
-    >
-      <th mat-header-cell *matHeaderCellDef>
-        {{ column.header }}
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <div *ngIf="column.type === 'string'">
-          {{ column.cell(row) }}
-        </div>
   
-        <div *ngIf="column.type === 'array'">
-          <button
-            mat-raised-button
-            (click)="editElement(row)"
-            matTooltip="Edit"
-            matTooltipClass="mat-tooltip"
-            
-          >
-            Edit
-          </button>
-          <button
-            mat-raised-button
-            (click)="deleteElement(row)"
-            matTooltip="Delete"
-            matTooltipClass="mat-tooltip"
-          >
-            Delete
-          </button>
-        </div>
+    <!-- Bucle que genera las columnas de la tabla -->
+    <ng-container [matColumnDef]="tableData" *ngFor="let tableData of objectKeys(listHeaders)">
+      <!-- Celda de encabezado para cada columna -->
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{listHeaders[tableData]}}    </th>
+      <!-- Celda de datos para cada columna -->
+      <td mat-cell *matCellDef="let element"> {{element[tableData] }}</td>
+    </ng-container>
+  
+    <!-- Columna de acciones con botones de editar y eliminar -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let row">
+        <!-- Botón para editar un elemento -->
+        <button mat-raised-button matTooltip="Editar" matTooltipClass="mat-tooltip" (click)="editElement(row)">Editar</button>
+        <!-- Botón para eliminar un elemento -->
+        <button mat-raised-button matTooltip="Eliminar" matTooltipClass="mat-tooltip" (click)="deleteElement(row)">Eliminar</button>
       </td>
     </ng-container>
   
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-   
+    <!-- Fila de encabezado de la tabla -->
+    <tr mat-header-row *matHeaderRowDef="objectKeys(listHeaders).concat('actions')"></tr>
+    <!-- Fila de datos de la tabla -->
+    <tr mat-row *matRowDef="let row; columns: objectKeys(listHeaders).concat('actions');"></tr>
   </table>
+  <!-- Paginador para navegar a través de las páginas de la tabla -->
   <div class="paginator">
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"
       showFirstLastButtons
-      aria-label="Select page of periodic elements">
+      aria-label="Seleccionar página de elementos periódicos">
     </mat-paginator>
   </div>
-  
 </div>
-
