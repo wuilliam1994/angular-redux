@@ -6,6 +6,7 @@ import { AccountComponent } from './components/account/account.component';
 import { CategoryComponent } from './components/category/category.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { TableComponent } from './components/table/table.component';
+import { KitchenComponent } from './components/kitchen/kitchen.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
       {
         path: "table",
         component: TableComponent
+      },
+      {
+        path: "kitchen",
+        component: KitchenComponent
       },
       {
         path: "**",

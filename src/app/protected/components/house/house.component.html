@@ -1,7 +1,23 @@
 <div class="containerHouse">
   <mat-toolbar id="matToolbarHouse">
     <span>House</span>
+    <span class="example-spacer"></span>
+    <button
+      mat-raised-button
+      matTooltip="Adicionar"
+      matTooltipClass="mat-tooltip"
+      (click)="onAdd()"
+    >
+      Adicionar
+    </button>
   </mat-toolbar>
 
-  <app-data-table [data]="houseDataService.getListHouse" [listHeaders] = "columnHeader" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-data-table>
+  <app-data-table
+    [data]="houseDataService.getListHouse"
+    [listHeaders]="columnHeader"
+    [link]="linkTable"
+    [showNexts] ="true"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+  ></app-data-table>
 </div>

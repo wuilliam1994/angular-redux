@@ -6,6 +6,7 @@
             <input matInput formControlName="{{ key }}">
           </mat-form-field>
         </div>
+        <input *ngIf="isMenu" type="file" id="input-imagen" accept="image/*">
         <div mat-dialog-actions>
           <button mat-button (click)="cancel()" >Cancel</button>
           <button mat-button (click)="save()" cdkFocusInitial>Add</button>

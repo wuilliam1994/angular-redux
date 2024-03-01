@@ -1,5 +1,6 @@
 {
     "exportall.config.relExclusion": [
         "/src/app/auth/pages/login"
-    ]
+    ],
+    "editor.inlineSuggest.showToolbar": "onHover"
 }

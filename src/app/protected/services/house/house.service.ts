@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environments';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from "rxjs";
 import { CookieService } from 'ngx-cookie-service';
+import { IWorker, Worker } from '../../interfaces/worker.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,48 @@ export class HouseService {
     .pipe(
       map(resp => {
         return resp;
+      })      
+    );
+  }
+
+  addHouse(house: any){
+    const token = this.cookieService.get('token');
+    const headers = new HttpHeaders({
+      'token': `${token}`
+    });
+    const url = `${this.baseUrl}/house/insert`;
+
+    const body = {
+      name: house.name,
+      cantTables: house.cantTables
+    }
+    return this.http.post<IHouse>(url, body, { 
+      headers, 
+      observe: 'response', 
+      responseType: 'json',
+     })
+    .pipe(
+      map(resp => {
+        return resp;
+      })      
+    );
+  }
+
+  getHouseUser() {
+    const token = this.cookieService.get('token');
+    const headers = new HttpHeaders({
+      'token': `${token}`
+    });
+    const url = `${this.baseUrl}/house/worker`;
+    
+    return this.http.get<IWorker>(url, { 
+      headers, 
+      observe: 'response', 
+      responseType: 'json',
+     })
+    .pipe(
+      map(resp => {
+        return resp.body?.data;
       })      
     );
   }

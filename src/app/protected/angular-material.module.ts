@@ -13,7 +13,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
-
+import { MatSelectModule } from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [],
@@ -28,7 +30,10 @@ import {MatMenuModule} from '@angular/material/menu';
     MatInputModule,
     MatFormFieldModule,
     MatTooltipModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule,
+    MatCardModule,
+    MatDividerModule
   ],
   exports: [
     CommonModule,
@@ -41,7 +46,10 @@ import {MatMenuModule} from '@angular/material/menu';
     MatInputModule,
     MatFormFieldModule,
     MatTooltipModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule,
+    MatCardModule,
+    MatDividerModule
   ]
 })
 export class AngularMaterialModule { }

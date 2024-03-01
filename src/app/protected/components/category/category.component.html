@@ -1,1 +1,47 @@
-<p>category works!</p>
+<div class="containerCategory">
+  <mat-toolbar id="matToolbarCategory">
+    <span>Category</span>
+    <span class="spacer"></span>
+    <!-- 
+    <mat-form-field>
+      <mat-label>Toppings</mat-label>
+      <mat-select [formControl]="toppings" multiple>
+        <mat-select-trigger>
+          {{toppings.value?.[0] || ''}}
+          <ng-container *ngIf="(toppings.value?.length || 0) > 1">
+            <span class="additional-selection">
+              (+{{ (toppings.value?.length || 0) - 1 }}
+              {{ toppings.value?.length === 2 ? "other" : "others" }})
+            </span>
+          </ng-container>
+        </mat-select-trigger>
+        <ng-container *ngFor="let topping of toppingList">
+          <mat-option [value]="topping">{{ topping }}</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field> -->
+
+    <select (change)="mostrarValores($event.target)">
+      <option value="" disabled selected>Seleccione categoria...</option>
+      <option *ngFor="let house of houses" [value]="house._id">
+        {{ house.name }}
+      </option>
+    </select>
+
+    <button
+      mat-raised-button
+      matTooltip="Adicionar"
+      matTooltipClass="mat-tooltip"
+      (click)="onAdd()"
+    >
+      Adicionar
+    </button>
+  </mat-toolbar>
+
+  <app-data-table
+    [data]="categoryDataService.getListCategory"
+    [listHeaders]="columnHeader"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+  ></app-data-table>
+</div>

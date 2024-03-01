@@ -2,25 +2,26 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environments';
-import { ITable, Table } from '../../interfaces/table.interface';
+// import { ITable, Table } from '../../interfaces/table.interface';
+import { Category, ICategory } from "../../interfaces/category.interface";
 import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TableService {
+export class CategoryService {
   private baseUrl: string = environment.baseURL;
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  listTables(idHouse: string){
+  listCategories(idHouse: string){
     const token = this.cookieService.get('token');
-    const url = `${this.baseUrl}/${idHouse}/table/list`;
+    const url = `${this.baseUrl}/${idHouse}/category/list`;
     
     const headers = new HttpHeaders({
       'token': `${token}`
     });
 
-    return this.http.get<ITable>(url, { 
+    return this.http.get<ICategory>(url, { 
       headers, 
       observe: 'response', 
       responseType: 'json',
@@ -30,17 +31,18 @@ export class TableService {
     );
   }
 
-  addTable(table: any, idHouse: string){
+  addCategory(category: any, idHouse: string){
     const token = this.cookieService.get('token');
     const headers = new HttpHeaders({
       'token': `${token}`
     });
-    const url = `${this.baseUrl}/${idHouse}/table/insert`;
+    const url = `${this.baseUrl}/${idHouse}/category/insert`;
 
     const body = {
-      number: parseInt(table['number']),
+      name: category['name'],
+      description: category['description'],
     }
-    return this.http.post<ITable>(url, body, { 
+    return this.http.post<ICategory>(url, body, { 
       headers, 
       observe: 'response', 
       responseType: 'json',
@@ -53,20 +55,20 @@ export class TableService {
   }
 
 
-  editTable(table: Table){
+  editCategory(category: Category){
     const token = this.cookieService.get('token');
-    const url = `${this.baseUrl}/${table.house}/table/edit/${table._id}`;
+    const url = `${this.baseUrl}/${category.house}/category/edit/${category._id}`;
 
     const body = {
-      number: table.number,
-      inUse: false
+     name: category.name,
+     description: category.description
     }
     
     const headers = new HttpHeaders({
       'token': `${token}`
     });
 
-    return this.http.put<ITable>(url, body, { 
+    return this.http.put<ICategory>(url, body, { 
       headers, 
       observe: 'response', 
       responseType: 'json',
@@ -80,13 +82,13 @@ export class TableService {
   }
 
 
-  deleteTable(table: Table){
+  deleteCategory(category: Category){
     const token = this.cookieService.get('token');
     const headers = new HttpHeaders({
       'token': `${token}`
     });
-    const url = `${this.baseUrl}/${table.house}/table/delete/${table._id}`;
-    return this.http.delete<ITable>(url, { 
+    const url = `${this.baseUrl}/${category.house}/category/delete/${category._id}`;
+    return this.http.delete<ICategory>(url, { 
       headers, 
       observe: 'response', 
       responseType: 'json',

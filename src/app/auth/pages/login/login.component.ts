@@ -29,6 +29,7 @@ export class LoginComponent {
       next: (resp) => {
         if (resp!.status === 200) {
           this.router.navigateByUrl("/home");
+          localStorage.setItem('user', JSON.stringify(resp?.data.user))
         }
       },
       error: (err) => {

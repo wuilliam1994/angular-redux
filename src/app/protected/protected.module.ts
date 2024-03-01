@@ -14,7 +14,11 @@ import { AngularMaterialModule } from './angular-material.module';
 import { DataTableComponent } from './shared/data-table/data-table.component';
 import { HouseModalComponent } from './shared/house-modal/house-modal.component';
 import { GenericModalEditComponent } from './shared/generic-modal-edit/generic-modal-edit.component';
+import { KitchenComponent } from './components/kitchen/kitchen.component';
+// import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+// import { WrappedSocket } from 'ngx-socket-io/src/socket-io.service';
 
+// const config: SocketIoConfig = { url: 'http://localhost:4001', options: {} };
 
 
 @NgModule({
@@ -28,14 +32,17 @@ import { GenericModalEditComponent } from './shared/generic-modal-edit/generic-m
     EditHouseDialogComponent,
     DataTableComponent,
     HouseModalComponent,
-    GenericModalEditComponent
+    GenericModalEditComponent,
+    KitchenComponent,
+
   ],
   imports: [
     CommonModule,
     ProtectedRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    AngularMaterialModule
-  ]
+    AngularMaterialModule,
+    // SocketIoModule.forRoot(config)
+  ],
 })
 export class ProtectedModule { }

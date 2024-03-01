@@ -25,6 +25,7 @@ export class AuthService {
   login(email: string, password: string){
     const url = `${this.baseUrl}/login`;
     const body = {email, password};
+    
 
     return this.http.post<AuthResponce>(url, body, { observe: 'response', responseType: 'json'})
     .pipe(
@@ -34,7 +35,7 @@ export class AuthService {
           this.cookieService.set('token', resp.body?.data.token!);
         }
       }),
-      map(resp => resp.body)
+      map(resp => resp.body )
     );
   }
 
@@ -59,6 +60,7 @@ export class AuthService {
 
   logout(){
     this.cookieService.delete('token');
+    localStorage.clear();
     this.router.navigateByUrl("/auth");
   }
 }

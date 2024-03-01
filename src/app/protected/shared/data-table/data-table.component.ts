@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { House } from '../../interfaces/house.interface';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,14 +18,18 @@ export class DataTableComponent implements OnInit {
 
   @Input() data!: Observable<any[]>;
   @Input() listHeaders: any;
+  @Input() link!: string;
+  @Input() showNexts: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   objectKeys = Object.keys;
   dataSource = new MatTableDataSource<House>();
-
+  
+constructor( private router: Router){}
 
   ngOnInit() {
     this.data.subscribe((resp) => {
       if (resp.length) {
+        console.log(resp[0].hasOwnProperty('product'));
         this.dataSource.data = resp;
       }
     });
@@ -40,12 +45,17 @@ export class DataTableComponent implements OnInit {
 
   editElement(element: any) {
       this.edit.emit(element);
+  }
 
-      
-    }
+  deleteElement(element: any) {
+    this.delete.emit(element);
+    // console.log(element);
+  }
 
-    deleteElement(element: any) {
-      this.delete.emit(element);
-      // console.log(element);
-    }
+  nextElement(element: any){
+    this.router.navigate(['/home/table'], {
+      state: element
+    });
+  }
+
 }

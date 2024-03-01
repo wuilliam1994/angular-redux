@@ -1,8 +1,8 @@
 import { Data, IResponse } from "./response.interface";
 
-export interface IHouse extends IResponse<Data<CategoryInterface>> {}
+export interface ICategory extends IResponse<Data<Category>> {}
 
-export interface CategoryInterface {
+export interface Category {
     _id: string;
     house: string;
     name: string;
