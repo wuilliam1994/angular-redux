@@ -1,0 +1,26 @@
+<ng-container *ngFor="let consumed of ordersReady.pending; let i = index">
+    <div class="container">
+      <mat-card class="example-card">
+        <h1 class="title-sup">Mesa: {{ consumed.account.table.number }}</h1>
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title
+              ><h3>Producto:</h3>
+              <h4>{{ consumed.menuProduct.product }}</h4></mat-card-title
+            >
+            <mat-card-title
+              ><h3>Cantidad:</h3>
+              <h4>{{ consumed.cantProduct }}</h4></mat-card-title
+            >
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <div class="btnWarn">
+          <button mat-raised-button color="warn" (click)="deletedElement(i)">
+            Pedido Entregado
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
+  

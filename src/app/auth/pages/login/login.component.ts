@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user.interface';
 import Swal from 'sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
+import { HouseService } from 'src/app/protected/services/house/house.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private houseService: HouseService
   ) {}
 
   login() {
@@ -29,6 +31,12 @@ export class LoginComponent {
       next: (resp) => {
         if (resp!.status === 200) {
           this.router.navigateByUrl("/home");
+          
+          if (resp?.data.user.role.includes("worker")) {
+            this.houseService.getHouseUser().subscribe(item => {
+              localStorage.setItem('houseWorker', item!.house)
+            })
+          }
           localStorage.setItem('user', JSON.stringify(resp?.data.user))
         }
       },

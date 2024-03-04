@@ -6,6 +6,8 @@ import { map, tap, Observable, of} from "rxjs";
 import { User } from '../interfaces/user.interface';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { HouseService } from 'src/app/protected/services/house/house.service';
+import { Worker } from 'src/app/protected/interfaces/worker.interface';
 
 
 @Injectable({
@@ -25,7 +27,6 @@ export class AuthService {
   login(email: string, password: string){
     const url = `${this.baseUrl}/login`;
     const body = {email, password};
-    
 
     return this.http.post<AuthResponce>(url, body, { observe: 'response', responseType: 'json'})
     .pipe(
@@ -38,6 +39,8 @@ export class AuthService {
       map(resp => resp.body )
     );
   }
+
+ 
 
   register(username: string, email: string, password: string){
     const url = `${this.baseUrl}/register`;
@@ -53,10 +56,16 @@ export class AuthService {
   getAuthToken(): Observable<boolean>{
     let token = this.cookieService.check('token');
     if (token) {
-      return of(true);
+      return of(true)
     }
     return of(false);
   }
+
+  getRoleUser(): Observable<User> {
+    const user = JSON.parse(localStorage.getItem('user')!) as User;
+    return of(user);
+  }
+
 
   logout(){
     this.cookieService.delete('token');

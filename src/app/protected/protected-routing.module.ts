@@ -7,6 +7,9 @@ import { CategoryComponent } from './components/category/category.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { TableComponent } from './components/table/table.component';
 import { KitchenComponent } from './components/kitchen/kitchen.component';
+import { OrdersReadyComponent } from './components/orders-ready/orders-ready.component';
+import { TakeOrdersComponent } from './components/take-orders/take-orders.component';
+import { hasRole,} from '../guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,27 +22,47 @@ const routes: Routes = [
       // },
       {
         path: "account",
-        component: AccountComponent
+        component: AccountComponent,
       },
       {
         path: "category",
-        component: CategoryComponent
+        component: CategoryComponent,
+        canActivate: [hasRole(['owner'])]
+
       },
       {
         path: "house",
-        component: HouseComponent
+        component: HouseComponent,
+        canActivate: [hasRole(['owner'])]
       },
       {
         path: "menu",
-        component: MenuComponent
+        component: MenuComponent,
+        canActivate: [hasRole(['owner'])]
+
       },
       {
         path: "table",
-        component: TableComponent
+        component: TableComponent,
+        canActivate: [hasRole(['owner'])]
+
       },
       {
         path: "kitchen",
-        component: KitchenComponent
+        component: KitchenComponent,
+        canActivate: [hasRole(['worker'])]
+
+      },
+      {
+        path: "orders-ready",
+        component: OrdersReadyComponent,
+        canActivate: [hasRole(['worker'])]
+
+      },
+      {
+        path: "take-orders",
+        component: TakeOrdersComponent,
+        canActivate: [hasRole(['worker'])],
       },
       {
         path: "**",

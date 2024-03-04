@@ -11,7 +11,7 @@ import { House } from '../../interfaces/house.interface';
 import { Category } from '../../interfaces/category.interface';
 import { GenericModalEditComponent } from '../../shared/generic-modal-edit/generic-modal-edit.component';
 import Swal from 'sweetalert2';
-import { TestDataService } from '../../services/test-data.service';
+import { Upload } from '../../interfaces/upload.interface';
 
 @Component({
   selector: 'app-menu',
@@ -44,11 +44,9 @@ export class MenuComponent implements OnInit {
     public menuDataService: MenuDataService,
     public houseService: HouseService,
     public categoryService: CategoryService,
-    private dialog: MatDialog,
-    private testDataService: TestDataService
-  ) {
-  }
-  
+    private dialog: MatDialog
+  ) {}
+
   ngOnInit(): void {
     this.menuDataService.setListMenu = [];
 
@@ -96,45 +94,42 @@ export class MenuComponent implements OnInit {
       const dialogRef = this.dialog.open(GenericModalEditComponent, {
         width: '40%',
         // height: '100%',
-        data: { Producto: '', Precio: '', Cantidad: ''},
+        data: { Producto: '', Precio: '', Cantidad: '' },
       });
       dialogRef.afterClosed().subscribe((result) => {
-        this.testDataService.getListTable.subscribe(items => {
-          extImag = items.type;
-          this.transImgBin(items)
-          .then(value => {
-            console.log(value);
-            imgBin = value
-            let element = {
-              product: result['Producto'],
-              price: result['Precio'],
-              cantidad: result['Cantidad'],
-              photo: imgBin,
-              extension: extImag,
-            };
-            this.menuService
-              .addMenu(element, this.houseSelected!, this.categorySelected!)
-              .subscribe({
-                next: (resp) => {
-                  Swal.fire({
-                    title: 'Added!',
-                    text: 'La categoria a sido adicionada correctamente.',
-                    icon: 'success',
-                  }).then(() => {
-                    this.loadData();
-                  });
-                },
-                error: (err) => {
-                  Swal.fire({
-                    title: 'Error!',
-                    text: err.error.message,
-                    icon: 'error',
-                  });
-                },
-              });
-          })
-          .catch(err => console.log(err));
-        });
+        if (result) {
+          this.menuService
+            .uploadImg(result['file'], this.houseSelected!)
+            .subscribe((item) => {
+
+              let element = {
+                product: result['Producto'],
+                price: result['Precio'],
+                cantidad: result['Cantidad'],
+                photo: item?.data['name'],
+              };
+              this.menuService
+                .addMenu(element, this.houseSelected!, this.categorySelected!)
+                .subscribe({
+                  next: (resp) => {
+                    Swal.fire({
+                      title: 'Added!',
+                      text: 'El menu a sido adicionado correctamente.',
+                      icon: 'success',
+                    }).then(() => {
+                      this.loadData();
+                    });
+                  },
+                  error: (err) => {
+                    Swal.fire({
+                      title: 'Error!',
+                      text: err.error.message,
+                      icon: 'error',
+                    });
+                  },
+                });
+            });
+        }
       });
     }
   }
@@ -150,44 +145,83 @@ export class MenuComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        (element.product = result['Producto']),
-          (element.price = result['Precio']),
-          (element.cantidad = result['Cantidad']),
-        this.menuService
-          .editMenu(element, this.houseSelected!, this.categorySelected!)
-          .subscribe({
-            next: (resp) => {},
-            error: (err) => console.log(err),
-          });
+        element.product = result['Producto'];
+        element.price = result['Precio'];
+        element.cantidad = result['Cantidad'];
+        if (result['file'] !== undefined) {
+          this.menuService
+            .deleteImgUp(element.photo, this.houseSelected!)
+            .subscribe((photoDeleted) => {
+              this.menuService
+                .uploadImg(result['file'], this.houseSelected!)
+                .subscribe((photoAdd) => {
+                  element.photo = photoAdd?.data['name']!;
+
+                  this.menuService
+                    .editMenu(
+                      element,
+                      this.houseSelected!,
+                      this.categorySelected!
+                    )
+                    .subscribe({
+                      next: (resp) => {},
+                      error: (err) => console.log(err),
+                    });
+                });
+            });
+        }
       }
     });
   }
 
   onDelete(element: Menu) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Usted esta seguro de querer eliminar el elemento?',
+      text: 'Esta accion no se puede revertir!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Si eliminar!',
     }).then((result) => {
       if (result.isConfirmed) {
         this.menuService
-          .deleteMenu(element, this.houseSelected!, this.categorySelected!)
+          .deleteImgUp(element.photo, this.houseSelected!)
           .subscribe({
             next: () => {
-              Swal.fire({
-                title: 'Deleted!',
-                text: 'Your file has been deleted.',
-                icon: 'success',
-              }).then(() => {
-                this.listMenu = this.listMenu.filter(
-                  (menu) => menu !== element
-                );
-                return (this.menuDataService.setListMenu = this.listMenu);
-              });
+              this.menuService
+                .deleteMenu(
+                  element,
+                  this.houseSelected!,
+                  this.categorySelected!
+                )
+                .subscribe({
+                  next: (menuDelete) => {
+                    Swal.fire({
+                      title: 'Eliminado!',
+                      text: 'Elemento eliminado exitosamente.',
+                      icon: 'success',
+                    }).then(() => {
+
+                      const menuString = JSON.stringify(menuDelete.body?.data['menu']);
+                      const test: Menu = JSON.parse(menuString)
+                      console.log(this.listMenu);
+                      
+                      // this.listMenu = this.listMenu.filter(
+                      //   (menu) => menu._id !== test._id
+                      // );
+                      // return (this.menuDataService.setListMenu = this.listMenu);
+                      this.loadData();
+                    });
+                  },
+                  error: () => {
+                    Swal.fire({
+                      title: 'Error!',
+                      text: 'Error deleted.',
+                      icon: 'error',
+                    });
+                  },
+                });
             },
             error: () => {
               Swal.fire({
@@ -199,25 +233,5 @@ export class MenuComponent implements OnInit {
           });
       }
     });
-  }
-
-  transImgBin(imagenFile: File): Promise<any> {
-    // Función para convertir una imagen a BinData
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-
-        reader.onload = () => {
-          const arrayBuffer = reader.result as ArrayBuffer;
-          const uint8Array = new Uint8Array(arrayBuffer);
-
-          resolve(uint8Array);
-        };
-
-        reader.onerror = (error) => {
-          reject(error);
-        };
-
-        reader.readAsArrayBuffer(imagenFile);
-      });
   }
 }

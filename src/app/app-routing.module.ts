@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { authGuard } from './guard/auth.guard';
+import { authGuard, hasRole } from './guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: "home",
     loadChildren: () => import('./protected/protected.module').then(m => m.ProtectedModule),
-    canMatch: [authGuard]
+    canActivate: [hasRole(['worker', 'owner'])]
   },
   {
     path: "**",

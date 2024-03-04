@@ -9,7 +9,7 @@ import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ConsumedPendingService {
+export class ConsumedService {
   private baseUrl: string = environment.baseURL;
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
@@ -18,6 +18,26 @@ export class ConsumedPendingService {
     // /:house/account/pending
     const token = this.cookieService.get('token');
     const url = `${this.baseUrl}/${idHouse}/account/pending`;
+    
+    const headers = new HttpHeaders({
+      'token': `${token}`
+    });
+
+    return this.http.get<IKitchen>(url, { 
+      headers, 
+      observe: 'response', 
+      responseType: 'json',
+     })
+    .pipe(
+      map(resp => resp.body),
+    );
+  }
+
+
+  getConsumedReady(idHouse: string) {
+    // /:house/account/pending
+    const token = this.cookieService.get('token');
+    const url = `${this.baseUrl}/${idHouse}/account/ready`;
     
     const headers = new HttpHeaders({
       'token': `${token}`

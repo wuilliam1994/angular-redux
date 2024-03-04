@@ -1,28 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Kitchen, Pending } from '../../interfaces/kitchen.interface';
-import { TableService } from '../../services/table/table.service';
-import { Table } from '../../interfaces/table.interface';
-import { Worker } from '../../interfaces/worker.interface';
+import { Component } from '@angular/core';
 import { HouseService } from '../../services/house/house.service';
-import { House } from '../../interfaces/house.interface';
+import { TableService } from '../../services/table/table.service';
 import { SocketService } from '../../services/socket/socket.service';
-import { ObservableNotification } from '@ngrx/effects/src/utils';
-import { BehaviorSubject } from 'rxjs';
 import { ConsumedService } from '../../services/consumed-pending/consumed.service';
+import { Table } from '../../interfaces/table.interface';
+import { Kitchen } from '../../interfaces/kitchen.interface';
 import { ISocket } from '../../interfaces/socket.interface';
 import Swal from 'sweetalert2';
 
-
-
 @Component({
-  selector: 'app-kitchen',
-  templateUrl: './kitchen.component.html',
-  styleUrls: ['./kitchen.component.scss']
+  selector: 'app-orders-ready',
+  templateUrl: './orders-ready.component.html',
+  styleUrls: ['./orders-ready.component.scss']
 })
-export class KitchenComponent implements OnInit {
+export class OrdersReadyComponent {
+
   arrayTable: string[] = [];
   tables: Table[] = []
-  kitchenPending: Kitchen = {
+  ordersReady: Kitchen = {
     pending:   [
       {
         "_id": "65dc9d58512eb37de483b296",
@@ -119,30 +114,30 @@ export class KitchenComponent implements OnInit {
     this.getMsg();
 
     this.houseService.getHouseUser().subscribe(house => {
-      this.consumedService.getConsumedPending(house?.house!).subscribe(pending => {
-        const kitchenPending = pending?.data['pending'] as Kitchen[];
-        console.log(kitchenPending);
-        if (kitchenPending.length !== 0) {
-          this.kitchenPending = kitchenPending[0]; 
+      this.consumedService.getConsumedReady(house?.house!).subscribe(pending => {
+        const ordersReady = pending?.data['pending'] as Kitchen[];
+        console.log(ordersReady);
+        if (ordersReady.length !== 0) {
+          this.ordersReady = ordersReady[0]; 
         }
       })
     })
     
   }
 
-  sendMsg(){
-    //area 1 es cocina area 2 es camarera de salon
-    const objSen = {
-      area: 1,
-    }
+  // sendMsg(){
+  //   //area 1 es cocina area 2 es camarera de salon
+  //   const objSen = {
+  //     area: 1,
+  //   }
 
-    this.socketService.sendMessage(objSen);
-  }
+  //   this.socketService.sendMessage(objSen);
+  // }
 
   deletedElement(element: number) {
-    this.sendMsg();
+    // this.sendMsg();
     this.arrayTable.splice(element, 1);    
-    this.kitchenPending.pending.splice(element, 1);    
+    this.ordersReady.pending.splice(element, 1);    
   }
 
   getMsg() {
@@ -159,14 +154,12 @@ export class KitchenComponent implements OnInit {
           timer: 1500
         });
 
-        
-
         this.houseService.getHouseUser().subscribe(house => {
-          this.consumedService.getConsumedPending(house?.house!).subscribe(pending => {
-            const kitchenPending = pending?.data['pending'] as Kitchen[];
-            console.log(kitchenPending);
-            if (kitchenPending.length !== 0) {
-              this.kitchenPending = kitchenPending[0]; 
+          this.consumedService.getConsumedReady(house?.house!).subscribe(pending => {
+            const ordersReady = pending?.data['pending'] as Kitchen[];
+            console.log(ordersReady);
+            if (ordersReady.length !== 0) {
+              this.ordersReady = ordersReady[0]; 
             }
           })
         })
@@ -174,7 +167,4 @@ export class KitchenComponent implements OnInit {
       }
     })
   }
-
- 
-
 }

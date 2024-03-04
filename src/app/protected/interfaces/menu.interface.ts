@@ -8,7 +8,7 @@ export interface Menu {
     category: string;
     product: string;
     price: number;
-    photo: Uint8Array;
+    photo: string;
     cantidad: number;
     extencion: string
     createdAt: Date;

@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TestDataService } from '../../services/test-data.service';
 
 @Component({
   selector: 'app-generic-modal-edit',
@@ -15,7 +14,6 @@ export class GenericModalEditComponent {
 
   constructor(
     public dialogRef: MatDialogRef<GenericModalEditComponent>,
-    private testDataService: TestDataService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder
   ) {
@@ -34,7 +32,7 @@ export class GenericModalEditComponent {
     if (this.form.valid) {
       if (this.isMenu) {
         const input = document.getElementById('input-imagen') as HTMLInputElement;
-        this.testDataService.setListTable = input.files![0];
+        this.form.value['file'] = input.files![0]
       }
       this.dialogRef.close(this.form.value);
     }

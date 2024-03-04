@@ -9,12 +9,15 @@
       </option>
     </select>
     <button *ngIf="cantTables > listTable.length" mat-raised-button matTooltip="Adicionar" matTooltipClass="mat-tooltip" (click)="onAdd()">Adicionar</button>
+    <button *ngIf="listTable.length" mat-raised-button matTooltip="Generar Todos QR" matTooltipClass="mat-tooltip" (click)="generateAllQr()">Generar Todos QR</button>
   </mat-toolbar>
 
   <app-data-table
     [data]="tableDataService.getListTable"
     [listHeaders]="columnHeader"
+    [generateQr] ="true"
     (edit)="onEdit($event)"
     (delete)="onDelete($event)"
+    (generate)="generateOneQr($event)"
   ></app-data-table>
 </div>

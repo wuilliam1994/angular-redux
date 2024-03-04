@@ -15,10 +15,10 @@ import { DataTableComponent } from './shared/data-table/data-table.component';
 import { HouseModalComponent } from './shared/house-modal/house-modal.component';
 import { GenericModalEditComponent } from './shared/generic-modal-edit/generic-modal-edit.component';
 import { KitchenComponent } from './components/kitchen/kitchen.component';
-// import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-// import { WrappedSocket } from 'ngx-socket-io/src/socket-io.service';
+import { OrdersReadyComponent } from './components/orders-ready/orders-ready.component';
+import { TakeOrdersComponent } from './components/take-orders/take-orders.component';
 
-// const config: SocketIoConfig = { url: 'http://localhost:4001', options: {} };
+
 
 
 @NgModule({
@@ -34,6 +34,8 @@ import { KitchenComponent } from './components/kitchen/kitchen.component';
     HouseModalComponent,
     GenericModalEditComponent,
     KitchenComponent,
+    OrdersReadyComponent,
+    TakeOrdersComponent
 
   ],
   imports: [
@@ -42,7 +44,7 @@ import { KitchenComponent } from './components/kitchen/kitchen.component';
     ReactiveFormsModule,
     FormsModule,
     AngularMaterialModule,
-    // SocketIoModule.forRoot(config)
+    
   ],
 })
 export class ProtectedModule { }

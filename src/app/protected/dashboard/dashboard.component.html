@@ -12,12 +12,14 @@
     <span class="example-spacer"></span>
 
     <div *ngIf="!showMenu">
-      <button mat-button routerLink="/home/house">House</button>
-      <button mat-button routerLink="/home/table">Table</button>
+      <button mat-button routerLink="/home/house" *ngIf="access">House</button>
+      <button mat-button routerLink="/home/table" *ngIf="access">Table</button>
       <button mat-button routerLink="/home/account">Account</button>
-      <button mat-button routerLink="/home/menu">Menu</button>
-      <button mat-button routerLink="/home/category">Categoria</button>
-      <button mat-button routerLink="/home/kitchen">Kitchen</button>
+      <button mat-button routerLink="/home/menu" *ngIf="access">Menu</button>
+      <button mat-button routerLink="/home/category" *ngIf="access">Categoria</button>
+      <button mat-button routerLink="/home/kitchen" *ngIf="!access">Kitchen</button>
+      <button mat-button routerLink="/home/take-orders" *ngIf="!access">Take Orders</button>
+      <button mat-button routerLink="/home/orders-ready" *ngIf="!access">Orders Ready</button>
     </div>
       
 
@@ -26,12 +28,15 @@
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-button routerLink="/home/house">House</button>
-      <button mat-button routerLink="/home/table">Table</button>
+      <button mat-button routerLink="/home/house" *ngIf="access">House</button>
+      <button mat-button routerLink="/home/table" *ngIf="access">Table</button>
       <button mat-button routerLink="/home/account">Account</button>
-      <button mat-button routerLink="/home/menu">Menu</button>
-      <button mat-button routerLink="/home/category">Categoria</button>
-      <button mat-button routerLink="/home/kitchen">Kitchen</button>
+      <button mat-button routerLink="/home/menu" *ngIf="access">Menu</button>
+      <button mat-button routerLink="/home/category" *ngIf="access">Categoria</button>
+      <button mat-button routerLink="/home/kitchen" *ngIf="!access">Kitchen</button>
+      <button mat-button routerLink="/home/take-orders" *ngIf="!access">Take Orders</button>
+      <button mat-button routerLink="/home/orders-ready" *ngIf="!access">Orders Ready</button>
+
     </mat-menu>
 
       

@@ -15,11 +15,13 @@ import { Router } from '@angular/router';
 export class DataTableComponent implements OnInit {
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
+  @Output() generate = new EventEmitter<any>();
 
   @Input() data!: Observable<any[]>;
   @Input() listHeaders: any;
   @Input() link!: string;
   @Input() showNexts: boolean = false;
+  @Input() generateQr: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   objectKeys = Object.keys;
   dataSource = new MatTableDataSource<House>();
@@ -29,7 +31,7 @@ constructor( private router: Router){}
   ngOnInit() {
     this.data.subscribe((resp) => {
       if (resp.length) {
-        console.log(resp[0].hasOwnProperty('product'));
+        // console.log(resp[0].hasOwnProperty('product'));
         this.dataSource.data = resp;
       }
     });
@@ -56,6 +58,10 @@ constructor( private router: Router){}
     this.router.navigate(['/home/table'], {
       state: element
     });
+  }
+
+  generarQr(element: any) {
+    this.generate.emit(element);
   }
 
 }

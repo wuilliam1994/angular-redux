@@ -16,6 +16,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+import { MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -33,7 +34,9 @@ import {MatDividerModule} from '@angular/material/divider';
     MatMenuModule,
     MatSelectModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatExpansionModule
+   
   ],
   exports: [
     CommonModule,
@@ -49,7 +52,8 @@ import {MatDividerModule} from '@angular/material/divider';
     MatMenuModule,
     MatSelectModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatExpansionModule
   ]
 })
 export class AngularMaterialModule { }

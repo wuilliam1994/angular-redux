@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { GenericModalEditComponent } from '../../shared/generic-modal-edit/generic-modal-edit.component';
 import Swal from 'sweetalert2';
 import { HouseService } from '../../services/house/house.service';
+import { GenerateQrService } from '../../services/generate-qr/generate-qr.service';
+import { environment } from 'src/environments/environments';
 
 @Component({
   selector: 'app-table',
@@ -18,6 +20,8 @@ export class TableComponent implements OnInit {
   objetoParametro!: House;
   listTable: Table[] = [];
   houseList: House[] = [];
+
+
 
   houseSelected?: string;
   cantTables: number = 0;
@@ -30,9 +34,11 @@ export class TableComponent implements OnInit {
     private tableService: TableService,
     public tableDataService: TableDataService,
     private houseService: HouseService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private generateQrService: GenerateQrService
   ) {
     this.objetoParametro = history.state as House;
+
     if (this.objetoParametro._id) {
       this.cantTables = this.objetoParametro.cantTables;
       this.loadData();
@@ -57,7 +63,7 @@ export class TableComponent implements OnInit {
     const house = this.objetoParametro._id
       ? this.objetoParametro._id
       : this.houseSelected;
-    console.log(house);
+    
     
     this.tableService.listTables(house!).subscribe({
       next: (resp) => {
@@ -158,5 +164,38 @@ export class TableComponent implements OnInit {
         });
       }
     });
+  }
+
+  generateOneQr(tableSelected: string) {
+    this.generateQrService.getGenerateQrOneTable(this.houseSelected!, tableSelected).subscribe(item => {
+
+      // Crear un nuevo elemento "a" (enlace)
+      const nuevoEnlace = document.createElement("a");
+
+      // Agregar atributos al enlace
+      nuevoEnlace.href = `http://localhost:4001/uploads/${item?.data.name}`;
+
+      // Agregar el enlace al cuerpo del documento (o a cualquier otro elemento)
+      document.body.appendChild(nuevoEnlace);
+      nuevoEnlace.click();
+
+    })
+    
+  }
+
+  generateAllQr() {
+    const arrayTable = this.listTable.map(item => item._id);
+    this.generateQrService.getGenerateQrManyTable(this.houseSelected!, arrayTable).subscribe(item => {
+      // Crear un nuevo elemento "a" (enlace)
+      const nuevoEnlace = document.createElement("a");
+
+      // Agregar atributos al enlace
+      nuevoEnlace.href = `http://localhost:4001/uploads/${item?.data.name}`;
+
+      // Agregar el enlace al cuerpo del documento (o a cualquier otro elemento)
+      document.body.appendChild(nuevoEnlace);
+      nuevoEnlace.click();
+    })
+    
   }
 }

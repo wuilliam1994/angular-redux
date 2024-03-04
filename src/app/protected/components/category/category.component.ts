@@ -64,7 +64,6 @@ export class CategoryComponent implements OnInit {
         return this.categoryDataService.setListCategory = this.listCategory;
       },
       error: (err) => {
-        console.log(err);
       },
     });
   }
