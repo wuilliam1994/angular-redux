@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HouseService } from '../../services/house/house.service';
 import { TableService } from '../../services/table/table.service';
 import { SocketService } from '../../services/socket/socket.service';
-import { ConsumedService } from '../../services/consumed-pending/consumed.service';
+import { ConsumedService } from '../../services/consumed/consumed.service';
 import { Table } from '../../interfaces/table.interface';
 import { Kitchen } from '../../interfaces/kitchen.interface';
 import { ISocket } from '../../interfaces/socket.interface';

@@ -1,76 +1,72 @@
 <div class="container">
-  <!-- <span class="spacer"></span> -->
-  <select (change)="selectCategory($event.target)">
-    <option value="" disabled selected>Seleccione una mesa...</option>
-    <option *ngFor="let table of tableList" [value]="table._id">
-      {{ table.number }}
-    </option>
-  </select>
+  <div class="select-container">
+    <select (change)="selectTable($event.target)">
+      <option value="" disabled selected>Seleccione una mesa...</option>
+      <option *ngFor="let table of tableList" [value]="table._id">
+        {{ table.number }}
+      </option>
+    </select>
+  </div>
+
   <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Entrantes </mat-panel-title>
-        <mat-panel-description>
-          Detalles Entrantes
-          <mat-icon>restaurant_menu</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+    <ng-container *ngFor="let menu of menuList">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            >Categoria: {{ menu.category.name }}
+          </mat-panel-title>
+          <mat-panel-description>
+            Detalles Entrantes
+            <mat-icon>restaurant_menu</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let item of menu.category.product">
+          <div class="claseTest">
+            <p>Producto: {{ item.product }}</p>
+  
+            <p>Precio: {{ item.price }}</p>
+  
+            <img
+              [src]="'http://localhost:4001/uploads/' + item.photo"
+              alt=""
+            />
+  
+            <mat-action-row>
+              <button
+                class="btnProduct"
+                (click)="addProductToOrder(item)"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+              <p class="textCount">Cant: {{ productCounters[item._id] || 0 }}</p>
+              <button
+                class="btnProduct"
+                [disabled]="productCounters[item._id] <= 0 || productCounters[item._id] === undefined"
+                (click)="subProductToOrder(item)"
+              >
+                <mat-icon>remove</mat-icon>
+              </button>
+            </mat-action-row>
+  
+          </div>
+        </ng-container>
+        
 
-      <!-- <mat-form-field>
-        <mat-label>First name</mat-label>
-        <input matInput />
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Age</mat-label>
-        <input matInput type="number" min="1" />
-      </mat-form-field> -->
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Bebidas </mat-panel-title>
-        <mat-panel-description>
-          Detalles de Bebidas
-          <mat-icon>local_cafe</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <!-- <mat-form-field>
-        <mat-label>Country</mat-label>
-        <input matInput />
-      </mat-form-field> -->
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Platos Principales </mat-panel-title>
-        <mat-panel-description>
-          Detalles de Platos Principales
-          <mat-icon>cake</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <!-- <mat-form-field>
-        <mat-label>Country</mat-label>
-        <input matInput />
-      </mat-form-field> -->
-    </mat-expansion-panel>
+        
+      </mat-expansion-panel>
+    </ng-container>
   </mat-accordion>
+  <div class="containerEnd">
+    <button
+      mat-button
+      (click)="openAccount()"
+      [hidden]="tableSelected?.length === 0"
+      [disabled]="tableSelected?.length === 0"
+    >
+      Crear Cuenta
+    </button>
+    <span [hidden]="tableSelected?.length === 0"
+      >Total de la cuenta: {{ totalAccount }}</span
+    >
+  </div>
 </div>
-
-<!-- <button mat-menu-item>
-    <mat-icon>restaurant_menu</mat-icon>
-    <span>Entradas</span>
-</button>
-<button mat-menu-item>
-    <mat-icon>local_dining</mat-icon>
-    <span>Platos principales</span>
-</button>
-<button mat-menu-item>
-    <mat-icon>local_cafe</mat-icon>
-    <span>Bebidas</span>
-</button>
-<button mat-menu-item>
-    <mat-icon>cake</mat-icon>
-    <span>Postres</span>
-</button> -->

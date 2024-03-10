@@ -14,6 +14,26 @@ export class ConsumedService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
+
+  addConsumed(idHouse: string, idTable: string, idAccount: string, body: any) {
+    // "/:house/:table/:account/consumed/insert"
+    const token = this.cookieService.get('token');
+    const url = `${this.baseUrl}/${idHouse}/${idTable}/${idAccount}/consumed/insert`;
+    
+    const headers = new HttpHeaders({
+      'token': `${token}`
+    });
+
+    return this.http.post<any>(url, body, { 
+      headers, 
+      observe: 'response', 
+      responseType: 'json',
+     })
+    .pipe(
+      map(resp => resp.body),
+    );
+  }
+
   getConsumedPending(idHouse: string) {
     // /:house/account/pending
     const token = this.cookieService.get('token');

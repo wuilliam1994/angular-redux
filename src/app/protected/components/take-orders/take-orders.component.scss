@@ -28,7 +28,56 @@
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-right: 10px;
     font-size: 14px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.select-container {
+  display: flex;
+  justify-content: end;
+}
+
+.claseTest {
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-form-field {
+  flex: 1; /* Para que ocupe el espacio restante */
+}
+
+.mat-action-row {
+  border-top: none !important;
+}
+
+p {
+  display: flex;
+  align-items: center;
+  margin: 0px;
+}
+
+img {
+  width: 100px;
+  border-radius: 20px;
+}
+
+.containerEnd {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnProduct {
+  background: transparent;
+  border: none;
+}
+
+.btnProduct:focus {
+  background: transparent;
+}
+
+.textCount {
+  margin: 10px 25px;
+  width: 60px;
+  display: inline-block;
 }

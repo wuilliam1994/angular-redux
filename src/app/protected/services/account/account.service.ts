@@ -1,30 +1,29 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { map } from 'rxjs';
-import { User } from 'src/app/auth/interfaces/user.interface';
 import { environment } from 'src/environments/environments';
-import { IFoodMenu } from '../../interfaces/food-menu.interface';
+import { IAccount } from '../../interfaces/account.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TakeOrdersService {
+export class AccountService {
 
   private baseUrl: string = environment.baseURL;
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  getFoodMenu(idHouse: string, idTable: string) {
+  createAccount(idHouse: string, idTable: string) {
 
     const token = this.cookieService.get('token');
-    const url = `${this.baseUrl}/${idHouse}/${idTable}`;
+    const url = `${this.baseUrl}/${idHouse}/${idTable}/account/insert`;
     
-    return this.http.get<IFoodMenu>(url, { 
+    return this.http.post<IAccount>(url, { 
       observe: 'response', 
       responseType: 'json',
      })
     .pipe(
-      map(resp => resp.body),
+      map(resp => resp.data),
     );
 
   }

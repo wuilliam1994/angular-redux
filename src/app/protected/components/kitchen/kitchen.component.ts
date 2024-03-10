@@ -8,7 +8,7 @@ import { House } from '../../interfaces/house.interface';
 import { SocketService } from '../../services/socket/socket.service';
 import { ObservableNotification } from '@ngrx/effects/src/utils';
 import { BehaviorSubject } from 'rxjs';
-import { ConsumedService } from '../../services/consumed-pending/consumed.service';
+import { ConsumedService } from '../../services/consumed/consumed.service';
 import { ISocket } from '../../interfaces/socket.interface';
 import Swal from 'sweetalert2';
 
