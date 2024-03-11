@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment';
 // import { ITable, Table } from '../../interfaces/table.interface';
 import { Category, ICategory } from "../../interfaces/category.interface";
 import { map } from 'rxjs';

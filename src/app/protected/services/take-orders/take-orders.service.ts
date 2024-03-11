@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { map } from 'rxjs';
 import { User } from 'src/app/auth/interfaces/user.interface';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment';
 import { IFoodMenu } from '../../interfaces/food-menu.interface';
 
 @Injectable({

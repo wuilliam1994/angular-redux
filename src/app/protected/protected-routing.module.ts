@@ -10,6 +10,7 @@ import { KitchenComponent } from './components/kitchen/kitchen.component';
 import { OrdersReadyComponent } from './components/orders-ready/orders-ready.component';
 import { TakeOrdersComponent } from './components/take-orders/take-orders.component';
 import { hasRole,} from '../guard/auth.guard';
+import { WorkerComponent } from './components/worker/worker.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,11 @@ const routes: Routes = [
 
       },
       {
+        path: "worker",
+        component: WorkerComponent,
+        canActivate: [hasRole(['owner'])],
+      },
+      {
         path: "kitchen",
         component: KitchenComponent,
         canActivate: [hasRole(['worker'])]
@@ -63,7 +69,7 @@ const routes: Routes = [
         path: "take-orders",
         component: TakeOrdersComponent,
         canActivate: [hasRole(['worker'])],
-      },
+      },      
       {
         path: "**",
         redirectTo: ""

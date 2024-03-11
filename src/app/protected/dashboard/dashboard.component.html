@@ -14,6 +14,7 @@
     <div *ngIf="!showMenu">
       <button mat-button routerLink="/home/house" *ngIf="access">House</button>
       <button mat-button routerLink="/home/table" *ngIf="access">Table</button>
+      <button mat-button routerLink="/home/worker" *ngIf="access">Worker</button>
       <button mat-button routerLink="/home/account">Account</button>
       <button mat-button routerLink="/home/menu" *ngIf="access">Menu</button>
       <button mat-button routerLink="/home/category" *ngIf="access">Categoria</button>
@@ -30,6 +31,7 @@
     <mat-menu #menu="matMenu">
       <button mat-button routerLink="/home/house" *ngIf="access">House</button>
       <button mat-button routerLink="/home/table" *ngIf="access">Table</button>
+      <button mat-button routerLink="/home/worker" *ngIf="access">Worker</button>
       <button mat-button routerLink="/home/account">Account</button>
       <button mat-button routerLink="/home/menu" *ngIf="access">Menu</button>
       <button mat-button routerLink="/home/category" *ngIf="access">Categoria</button>

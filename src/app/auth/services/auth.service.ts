@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment';
 import { AuthResponce } from '../interfaces/auth.interface';
 import { map, tap, Observable, of} from "rxjs";
 import { User } from '../interfaces/user.interface';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { HouseService } from 'src/app/protected/services/house/house.service';
-import { Worker } from 'src/app/protected/interfaces/worker.interface';
 
 
 @Injectable({

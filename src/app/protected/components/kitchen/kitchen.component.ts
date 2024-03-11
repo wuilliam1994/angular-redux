@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Kitchen, Pending } from '../../interfaces/kitchen.interface';
 import { TableService } from '../../services/table/table.service';
 import { Table } from '../../interfaces/table.interface';
-import { Worker } from '../../interfaces/worker.interface';
 import { HouseService } from '../../services/house/house.service';
 import { House } from '../../interfaces/house.interface';
 import { SocketService } from '../../services/socket/socket.service';

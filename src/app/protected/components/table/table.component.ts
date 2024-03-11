@@ -9,7 +9,7 @@ import { GenericModalEditComponent } from '../../shared/generic-modal-edit/gener
 import Swal from 'sweetalert2';
 import { HouseService } from '../../services/house/house.service';
 import { GenerateQrService } from '../../services/generate-qr/generate-qr.service';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-table',

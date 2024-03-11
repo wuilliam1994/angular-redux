@@ -1,0 +1,29 @@
+<div class="containerWorker">
+    <mat-toolbar id="matToolbarWorker">
+      <span>Worker</span>
+      <span class="example-spacer"></span>
+      <select (change)="changeHouse($event.target)">
+        <option value="" disabled selected>Seleccione una casa...</option>
+        <option *ngFor="let house of listHouses" [value]="house._id">
+          {{ house.name }}
+        </option>
+      </select>
+      <button
+        mat-raised-button
+        matTooltip="Adicionar"
+        matTooltipClass="mat-tooltip"
+        [disabled]="selectedHouse === ''"
+        (click)="onAdd()"
+      >
+        Adicionar
+      </button>
+    </mat-toolbar>
+  
+    <app-data-table
+      [data]="workerDataService.getListWorker"
+      [listHeaders]="columnHeader"
+      [link]="linkTable"
+      [btnEdit]="false"
+    ></app-data-table>
+  </div>
+  

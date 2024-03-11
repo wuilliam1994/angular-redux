@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment';
 import { Observable, map } from 'rxjs';
 import { Socket } from 'ngx-socket-io';
 import { ISocket } from '../../interfaces/socket.interface';

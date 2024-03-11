@@ -21,6 +21,7 @@ export class DataTableComponent implements OnInit {
   @Input() listHeaders: any;
   @Input() link!: string;
   @Input() showNexts: boolean = false;
+  @Input() btnEdit: boolean = true;
   @Input() generateQr: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   objectKeys = Object.keys;

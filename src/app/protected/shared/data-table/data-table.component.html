@@ -18,7 +18,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let row">
-        <button mat-raised-button matTooltip="Editar" matTooltipClass="mat-tooltip" (click)="editElement(row)">Editar</button>
+        <button *ngIf="btnEdit" mat-raised-button matTooltip="Editar" matTooltipClass="mat-tooltip" (click)="editElement(row)">Editar</button>
         <button mat-raised-button matTooltip="Eliminar" matTooltipClass="mat-tooltip" (click)="deleteElement(row)">Eliminar</button>
         <button *ngIf="showNexts" mat-raised-button matTooltip="Siguiente" matTooltipClass="mat-tooltip" (click)="nextElement(row)" >Siguiente</button>
         <button *ngIf="generateQr" mat-raised-button matTooltip="Generar QR" matTooltipClass="mat-tooltip" (click)="generarQr(row._id)" >Generar QR</button>

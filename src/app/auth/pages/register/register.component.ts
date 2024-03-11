@@ -19,12 +19,13 @@ export class RegisterComponent {
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService){}
 
   register(){
+
     const {username, email, password} = this.myForm.value;
     this.authService.register(username, email, password).subscribe({
       next: (resp) => {
         if (resp!.status === 200) {
           const token = document.cookie.trim().split('=')[1];
-          this.router.navigateByUrl("/home");
+          this.router.navigateByUrl("/login");
         }
       },
       error: (err) => {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { House, IHouse } from '../../interfaces/house.interface';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from "rxjs";
 import { CookieService } from 'ngx-cookie-service';
@@ -109,7 +109,7 @@ export class HouseService {
     });
     const url = `${this.baseUrl}/house/worker`;
     
-    return this.http.get<IWorker>(url, { 
+    return this.http.get<any>(url, { 
       headers, 
       observe: 'response', 
       responseType: 'json',

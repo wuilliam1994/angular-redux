@@ -2,31 +2,26 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { map } from 'rxjs';
+import { IUser, User } from 'src/app/auth/interfaces/user.interface';
 import { environment } from 'src/environments/environment';
-import { Qrgenerado } from '../../interfaces/qrgenerado.interface';
+import { IWorker } from '../../interfaces/worker.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GenerateQrService {
+export class WorkerService {
   private baseUrl: string = environment.baseURL;
-
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  getGenerateQrOneTable(idHouse: string, tableSelected: string) {
+  listWorkers(idHouse: string){
     const token = this.cookieService.get('token');
-    const url = `${this.baseUrl}/${idHouse}/qr`;
+    const url = `${this.baseUrl}/${idHouse}/worker/list`;
     
     const headers = new HttpHeaders({
       'token': `${token}`
     });
 
-    const body = {
-      url: this.baseUrl,
-      table: [tableSelected]
-    }
-
-    return this.http.post<Qrgenerado>(url, body, { 
+    return this.http.get<IWorker>(url, { 
       headers, 
       observe: 'response', 
       responseType: 'json',
@@ -34,29 +29,30 @@ export class GenerateQrService {
     .pipe(
       map(resp => resp.body),
     );
-
   }
 
-  getGenerateQrManyTable(idHouse: string, arrayTable: string[]) {
+
+  addWorker(idHouse: string, user: User){
     const token = this.cookieService.get('token');
-    const url = `${this.baseUrl}/${idHouse}/qr`;
-    
     const headers = new HttpHeaders({
       'token': `${token}`
     });
+    const url = `${this.baseUrl}/${idHouse}/worker/create`;
 
     const body = {
-      url: this.baseUrl,
-      table: arrayTable
+      username: user.username,
+      email: user.email,
+      password: user.password
     }
-
-    return this.http.post<Qrgenerado>(url, body, { 
+    return this.http.post<IWorker>(url, body, { 
       headers, 
       observe: 'response', 
       responseType: 'json',
      })
     .pipe(
-      map(resp => resp.body),
+      map(resp => {
+        return resp;
+      })      
     );
   }
 }
