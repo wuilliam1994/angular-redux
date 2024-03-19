@@ -15,6 +15,7 @@ import { WorkerDataService } from '../../services/worker/worker-data.service';
   styleUrls: ['./worker.component.scss']
 })
 export class WorkerComponent implements OnInit {
+
   columnHeader = {
     house: 'Casa',
     username: 'Usuario',
@@ -23,6 +24,7 @@ export class WorkerComponent implements OnInit {
   listHouses: House[] = [];
   linkTable = 'table';
   selectedHouse: string = '';
+  listData: any[] = [];
   constructor(
     private workerService: WorkerService,
     public workerDataService: WorkerDataService,
@@ -49,12 +51,11 @@ export class WorkerComponent implements OnInit {
     this.workerService.listWorkers(idHouse).subscribe({
       next: (resp) => {
         
-        const listWorkers = resp?.data.worker;
-        let listData: any[] = [];
+        const listWorkers = resp?.data.worker;        
         listWorkers!.forEach(element => {
-          listData.push({house: element.house.name, username: element.user.username, email: element.user.email})
+          this.listData.push({idHouse: element.house._id, house: element.house.name,idWorker: element.user._id, username: element.user.username, email: element.user.email})
         })
-        return (this.workerDataService.setListWorker = listData);
+        return (this.workerDataService.setListWorker = this.listData);
       },
       error: (err) => {
         console.log(err);
@@ -102,4 +103,41 @@ export class WorkerComponent implements OnInit {
       }
     });
   }
+
+  onDelete(element: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.workerService.deletedWorker(element.idHouse, element.idWorker).subscribe({
+          next: () => {
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Your file has been deleted.',
+              icon: 'success',
+            }).then(() => {
+              this.listData = this.listData.filter(
+                (data) => data.idWorker !== element.idWorker
+              );
+              return (this.workerDataService.setListWorker = this.listData);
+            });
+          },
+          error: () => {
+            Swal.fire({
+              title: 'Error!',
+              text: 'Error deleted.',
+              icon: 'error',
+            });
+          },
+        });
+      }
+    });
+  }
+
 }

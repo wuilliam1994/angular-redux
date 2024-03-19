@@ -18,6 +18,7 @@ import { KitchenComponent } from './components/kitchen/kitchen.component';
 import { OrdersReadyComponent } from './components/orders-ready/orders-ready.component';
 import { TakeOrdersComponent } from './components/take-orders/take-orders.component';
 import { WorkerComponent } from './components/worker/worker.component';
+import { ConsumerOrdersComponent } from './components/consumer-orders/consumer-orders.component';
 
 
 
@@ -37,7 +38,8 @@ import { WorkerComponent } from './components/worker/worker.component';
     KitchenComponent,
     OrdersReadyComponent,
     TakeOrdersComponent,
-    WorkerComponent
+    WorkerComponent,
+    ConsumerOrdersComponent
 
   ],
   imports: [

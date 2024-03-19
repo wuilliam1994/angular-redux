@@ -1,0 +1,64 @@
+<div class="container">
+    <mat-accordion class="example-headers-align" multi>
+      <ng-container *ngFor="let menu of menuList">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title
+              >Categoria: {{ menu.category.name }}
+            </mat-panel-title>
+            <mat-panel-description>
+              Detalles Entrantes
+              <mat-icon>restaurant_menu</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <ng-container *ngFor="let item of menu.category.product">
+            <div class="claseTest">
+              <p>Producto: {{ item.product }}</p>
+    
+              <p>Precio: {{ item.price }}</p>
+    
+              <img
+                [src]="baseUrl + '/uploads/' + item.photo"
+                alt=""
+              />
+    
+              <mat-action-row>
+                <button
+                  class="btnProduct"
+                  (click)="addProductToOrder(item)"
+                >
+                  <mat-icon>add</mat-icon>
+                </button>
+                <p class="textCount">Cant: {{ productCounters[item._id] || 0 }}</p>
+                <button
+                  class="btnProduct"
+                  [disabled]="productCounters[item._id] <= 0 || productCounters[item._id] === undefined"
+                  (click)="subProductToOrder(item)"
+                >
+                  <mat-icon>remove</mat-icon>
+                </button>
+              </mat-action-row>
+    
+            </div>
+          </ng-container>
+          
+  
+          
+        </mat-expansion-panel>
+      </ng-container>
+    </mat-accordion>
+    <div class="containerEnd">
+      <button
+        mat-button
+        (click)="openAccount()"
+        [hidden]="menuList.length === 0"
+        [disabled]="menuList.length === 0"
+      >
+        Crear Cuenta
+      </button>
+      <span [hidden]="menuList.length === 0"
+        >Total de la cuenta: {{ totalAccount }}</span
+      >
+    </div>
+  </div>
+  

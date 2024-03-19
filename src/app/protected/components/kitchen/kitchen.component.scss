@@ -15,15 +15,29 @@
     padding: 10px 0px;
   }
 
-  h3 {
-    display: inline-block;
-    margin-bottom: 20px;
+  .mat-mdc-card-content {
+    padding: 0px;
   }
 
-  h4 {
+  .mat-mdc-card-header {
+    font-size: xx-large;
+    padding: 10px 0px;
+  }
+
+  .dividerRows {
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  span {
     text-align: center;
-    display: inline-block;
-    margin-left: 50px;
+    width: 50%;
+  }
+
+  .containerData {
+    display: flex;
+    padding: 5px 0px;
+    font-size: larger;
   }
 
   .btnWarn {

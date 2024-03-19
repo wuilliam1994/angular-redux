@@ -1,14 +1,24 @@
-import { Data, IResponse } from "./response.interface";
-
-export interface IKitchen extends IResponse<Data<Kitchen>> {}
+export interface IKitchen {
+    status:  number;
+    message: string;
+    data:    Kitchen;
+}
 
 export interface Kitchen {
     pending: Pending[];
 }
 
 export interface Pending {
-    _id:            string;
-    account:        Account;
+    account: Account;
+}
+
+export interface Account {
+    _id:     string;
+    table:   Table;
+    product: Product[];
+}
+
+export interface Product {
     menuProduct:    MenuProduct;
     cantProduct:    number;
     balanceProduct: number;
@@ -17,17 +27,12 @@ export interface Pending {
     updatedAt:      Date;
 }
 
-export interface Account {
-    _id:   string;
-    table: Table;
+export interface MenuProduct {
+    _id:     string;
+    product: string;
 }
 
 export interface Table {
     _id:    string;
     number: number;
-}
-
-export interface MenuProduct {
-    _id:     string;
-    product: string;
 }

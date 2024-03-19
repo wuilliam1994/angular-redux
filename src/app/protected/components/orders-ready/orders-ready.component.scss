@@ -1,34 +1,48 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
 }
 .example-card {
-    width: 700px;
-    margin-bottom: 8px;
-  }
+  width: 700px;
+  margin-bottom: 8px;
+}
 
-  .title-sup {
-    background: #F5F5F5;
-    text-align: center;
-    padding: 10px 0px;
-  }
+.title-sup {
+  background: #F5F5F5;
+  text-align: center;
+  padding: 10px 0px;
+}
 
-  h3 {
-    display: inline-block;
-    margin-bottom: 20px;
-  }
+.mat-mdc-card-content {
+  padding: 0px;
+}
 
-  h4 {
-    text-align: center;
-    display: inline-block;
-    margin-left: 50px;
-  }
+.mat-mdc-card-header {
+  font-size: xx-large;
+  padding: 10px 0px;
+}
 
-  .btnWarn {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
+.dividerRows {
+  width: 80%;
+  margin-left: 10%;
+}
+
+span {
+  text-align: center;
+  width: 50%;
+}
+
+.containerData {
+  display: flex;
+  padding: 5px 0px;
+  font-size: larger;
+}
+
+.btnWarn {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

@@ -22,36 +22,4 @@ export class SocketService {
   getMessage() {
     return this.socket.fromEvent('pedidos').pipe(map(data => data));
   }
-
- 
-
-
-
-
-
-  // joinRoom(idHouse: string) {
-  //   this.socket.emit('join_room', idHouse)
-  // }
-
-  // sendMessage(message: string){
-  //   console.log('socket send');
-    
-  //   this.socket.emit('pedidos', message);
-  // }
-
-  // getMessages(): Observable<any> {
-
-  //   let observable = new Observable<{ user: String, message: String }>(observer => {
-  //     console.log('socket get');
-      
-  //     this.socket.on('pedidos', (data) => {
-  //       console.log(data);
-        
-  //       observer.next(data);
-  //     });
-  //   });
-  //   return observable;
-  // }
-  
-
 }

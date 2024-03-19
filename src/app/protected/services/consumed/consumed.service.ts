@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
-import { IKitchen } from '../../interfaces/kitchen.interface';
+import { Account, IKitchen } from '../../interfaces/kitchen.interface';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -43,7 +43,7 @@ export class ConsumedService {
     });
 
     return this.http.get<IKitchen>(url, { 
-      headers, 
+      headers,
       observe: 'response', 
       responseType: 'json',
      })
@@ -52,8 +52,32 @@ export class ConsumedService {
     );
   }
 
+  setConsumedReady(account: Account, idHouse: string, idConsumeds: string[]) {
+    // /:house/:table/:account/consmed/ready/:id"
+    const token = this.cookieService.get('token');
+    
+    const url = `${this.baseUrl}/${idHouse}/${account.table._id}/${account._id}/consmed/ready`;
+    
+    const headers = new HttpHeaders({
+      'token': `${token}`
+    });
 
-  getConsumedReady(idHouse: string) {
+    const body = {
+      "product": idConsumeds
+    }
+
+    return this.http.put<IKitchen>(url, body, { 
+      headers,
+      observe: 'response', 
+      responseType: 'json',
+     })
+    .pipe(
+      map(resp => resp),
+    );
+  } 
+
+
+  getAccountReady(idHouse: string) {
     // /:house/account/pending
     const token = this.cookieService.get('token');
     const url = `${this.baseUrl}/${idHouse}/account/ready`;
@@ -69,6 +93,30 @@ export class ConsumedService {
      })
     .pipe(
       map(resp => resp.body),
+    );
+  }
+
+  setAccountInTable(account: Account, idHouse: string, idAccounts: string[]) {
+    // /:house/:table/:account/consmed/ready/:id"
+    const token = this.cookieService.get('token');
+    const url = `${this.baseUrl}/${idHouse}/${account.table._id}/${account._id}/consmed/intable`;
+    
+    
+    const headers = new HttpHeaders({
+      'token': `${token}`
+    });
+
+    const body = {
+      "product": idAccounts
+    }
+
+    return this.http.put<IKitchen>(url, body, { 
+      headers,
+      observe: 'response', 
+      responseType: 'json',
+     })
+    .pipe(
+      map(resp => resp),
     );
   }
 }

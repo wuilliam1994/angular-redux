@@ -55,4 +55,24 @@ export class WorkerService {
       })      
     );
   }
+
+  deletedWorker(idHouse: string, idWorker:string) {
+    const token = this.cookieService.get('token');
+    const headers = new HttpHeaders({
+      'token': `${token}`
+    });
+    const url = `${this.baseUrl}/${idHouse}/worker/delete/${idWorker}`;
+
+    return this.http.delete<IWorker>(url, { 
+      headers, 
+      observe: 'response', 
+      responseType: 'json',
+     })
+    .pipe(
+      map(resp => {
+        return resp;
+      })      
+    );
+  }
+
 }

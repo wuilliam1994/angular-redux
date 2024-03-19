@@ -4,7 +4,7 @@ import { TableService } from '../../services/table/table.service';
 import { SocketService } from '../../services/socket/socket.service';
 import { ConsumedService } from '../../services/consumed/consumed.service';
 import { Table } from '../../interfaces/table.interface';
-import { Kitchen } from '../../interfaces/kitchen.interface';
+import { Kitchen, Pending } from '../../interfaces/kitchen.interface';
 import { ISocket } from '../../interfaces/socket.interface';
 import Swal from 'sweetalert2';
 
@@ -15,88 +15,10 @@ import Swal from 'sweetalert2';
 })
 export class OrdersReadyComponent {
 
-  arrayTable: string[] = [];
   tables: Table[] = []
-  ordersReady: Kitchen = {
-    pending:   [
-      {
-        "_id": "65dc9d58512eb37de483b296",
-        "account": {
-            "_id": "65dc9c05512eb37de483b28e",
-            "table": {
-                "_id": "65db5bf7fa0ff0c68ffe96ab",
-                "number": 1
-            }
-        },
-        "menuProduct": {
-            "_id": "65db647ebb3ff24db2bb47b9",
-            "product": "agua natural"
-        },
-        "cantProduct": 2,
-        "balanceProduct": 4,
-        "ready": false,
-        "createdAt": new Date("2024-02-26T14:16:56.251Z"),
-        "updatedAt": new Date("2024-02-26T14:16:56.251Z")
-    },
-    {
-        "_id": "65dc9d58512eb37de483b297",
-        "account": {
-            "_id": "65dc9c05512eb37de483b28e",
-            "table": {
-                "_id": "65db5bf7fa0ff0c68ffe96ab",
-                "number": 1
-            }
-        },
-        "menuProduct": {
-            "_id": "65db648fbb3ff24db2bb47be",
-            "product": "refresco de cola"
-        },
-        "cantProduct": 1,
-        "balanceProduct": 4,
-        "ready": false,
-        "createdAt": new Date("2024-02-26T14:16:56.251Z"),
-        "updatedAt": new Date("2024-02-26T14:16:56.251Z")
-    },
-    {
-        "_id": "65dc9d58512eb37de483b298",
-        "account": {
-            "_id": "65dc9c05512eb37de483b28e",
-            "table": {
-                "_id": "65db5bf7fa0ff0c68ffe96ab",
-                "number": 1
-            }
-        },
-        "menuProduct": {
-            "_id": "65db6550bb3ff24db2bb47ce",
-            "product": "arroz blanco"
-        },
-        "cantProduct": 3,
-        "balanceProduct": 300,
-        "ready": false,
-        "createdAt": new Date("2024-02-26T14:16:56.251Z"),
-        "updatedAt": new Date("2024-02-26T14:16:56.251Z")
-    },
-    {
-        "_id": "65dc9d58512eb37de483b299",
-        "account": {
-            "_id": "65dc9c05512eb37de483b28e",
-            "table": {
-                "_id": "65db5bf7fa0ff0c68ffe96ab",
-                "number": 1
-            }
-        },
-        "menuProduct": {
-            "_id": "65db6571bb3ff24db2bb47d8",
-            "product": "sopa amarilla"
-        },
-        "cantProduct": 2,
-        "balanceProduct": 260,
-        "ready": false,
-        "createdAt": new Date("2024-02-26T14:16:56.251Z"),
-        "updatedAt": new Date("2024-02-26T14:16:56.251Z")
-    }
-    ]
-  }
+  ordersReady!: Pending[];
+  idHouse: string = '';
+
 
 
 
@@ -110,61 +32,56 @@ export class OrdersReadyComponent {
   }
   
   ngOnInit(): void {
+    this.idHouse = localStorage.getItem('houseWorker')!;
     
-    this.getMsg();
+    // this.getMsg();
 
-    this.houseService.getHouseUser().subscribe(house => {
-      this.consumedService.getConsumedReady(house?.house!).subscribe(pending => {
-        const ordersReady = pending?.data['pending'] as Kitchen[];
-        console.log(ordersReady);
-        if (ordersReady.length !== 0) {
-          this.ordersReady = ordersReady[0]; 
-        }
+      this.consumedService.getAccountReady(this.idHouse).subscribe(ready => {
+        
+        this.ordersReady =  ready?.data.pending.length !== 0 ? ready?.data.pending! : []; 
+
       })
-    })
+  }
+
+  deletedElement(pending : Pending) {
+    const idAccounts = pending.account.product.map(element => element.menuProduct._id);
+    console.log(idAccounts);
     
-  }
-
-  // sendMsg(){
-  //   //area 1 es cocina area 2 es camarera de salon
-  //   const objSen = {
-  //     area: 1,
-  //   }
-
-  //   this.socketService.sendMessage(objSen);
-  // }
-
-  deletedElement(element: number) {
-    // this.sendMsg();
-    this.arrayTable.splice(element, 1);    
-    this.ordersReady.pending.splice(element, 1);    
-  }
-
-  getMsg() {
-    this.socketService.getMessage().subscribe(item => {
-      const objSocket = item as ISocket;
-      
-      if (objSocket.body.area === 1) {
-
-        Swal.fire({
-          position: "top-end",
-          icon: "info",
-          title: "Un nuevo pedido se ha terminado",
-          showConfirmButton: false,
-          timer: 1500
-        });
-
-        this.houseService.getHouseUser().subscribe(house => {
-          this.consumedService.getConsumedReady(house?.house!).subscribe(pending => {
-            const ordersReady = pending?.data['pending'] as Kitchen[];
-            console.log(ordersReady);
-            if (ordersReady.length !== 0) {
-              this.ordersReady = ordersReady[0]; 
-            }
-          })
-        })
-
+    this.consumedService.setAccountInTable(pending.account, this.idHouse, idAccounts).subscribe({
+      next: (resp)=> {        
+        console.log(resp);
+      },
+      error: (err)=> {
+        console.log(err);
+        
       }
     })
+    for (let i = 0; i < this.ordersReady.length; i++) {
+      if (this.ordersReady[i].account._id === pending.account._id) {
+        this.ordersReady.splice(i, 1);
+        break;
+      }
+    }
   }
+
+  // getMsg() {
+  //   this.socketService.getMessage().subscribe(item => {
+  //     const objSocket = item as ISocket;
+  //     console.log(objSocket);      
+      
+  //     if (objSocket.body.area === 1) {
+
+  //       Swal.fire({
+  //         position: "top-end",
+  //         icon: "info",
+  //         title: "Un orden se ha terminado en la cocina",
+  //         showConfirmButton: false,
+  //         timer: 1500
+  //       });
+  //         this.consumedService.getAccountReady(this.idHouse).subscribe(ready => {
+  //           this.ordersReady =  ready?.data.pending.length !== 0 ? ready?.data.pending! : []; 
+  //         })
+  //     }
+  //   })
+  // }
 }
