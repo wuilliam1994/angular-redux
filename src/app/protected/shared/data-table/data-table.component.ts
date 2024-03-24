@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { House } from '../../interfaces/house.interface';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class DataTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   objectKeys = Object.keys;
   dataSource = new MatTableDataSource<House>();
+  baseUrlImage = environment.baseDirectoryImage;
   
 constructor( private router: Router){}
 

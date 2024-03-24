@@ -7,7 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 import { EffectsModule } from '@ngrx/effects';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
-const config: SocketIoConfig = { url: 'https://bars-restaurants.onrender.com', options: {} };
+import { environment } from 'src/environments/environment';
+const config: SocketIoConfig = { url: environment.baseDirectorySocket, options: {} };
 @NgModule({
   declarations: [
     AppComponent,

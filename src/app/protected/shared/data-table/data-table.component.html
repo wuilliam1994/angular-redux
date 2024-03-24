@@ -8,7 +8,7 @@
       <td mat-cell *matCellDef="let element">
         <span *ngIf="listHeaders[tableData] !== 'Foto'">{{element[tableData] }}</span>
         <ng-container *ngIf="listHeaders[tableData] === 'Foto'">
-          <img [src]="'http://localhost:4001/uploads/'+element[$index]" alt="">
+          <img [src]="baseUrlImage + element[$index]" alt="">
         </ng-container>
         
         <!-- <span *ngIf="listHeaders[tableData] === 'Foto'">{{element[$index] }}</span> -->
