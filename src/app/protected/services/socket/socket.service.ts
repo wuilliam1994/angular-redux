@@ -11,7 +11,7 @@ export class SocketService {
   houseWorker = '';
   constructor(private socket: Socket) {
     this.houseWorker = localStorage.getItem('houseWorker')!;
-    this.socket.emit('join_room', 'test')
+    this.socket.emit('join_room', this.houseWorker)
   }
 
 
