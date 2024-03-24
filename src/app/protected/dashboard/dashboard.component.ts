@@ -29,39 +29,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getMsg();
     const userLog = JSON.parse(localStorage.getItem('user')!) as User;
     this.access = userLog.role.includes('owner');
   }
   showHouse = false;
-
-  getMsg() {
-    this.socketService.getMessage().subscribe(item => {
-      const objSocket = item as ISocket;
-      console.log(objSocket);      
-      
-      if (objSocket.body.area === 1) {
-
-        Swal.fire({
-          position: "top-end",
-          icon: "info",
-          title: "Un orden se ha terminado en la cocina",
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
-      if (objSocket.body.area === 2) {
-
-        Swal.fire({
-          position: "top-end",
-          icon: "info",
-          title: "Un nuevo pedido se ha tomado",
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
-    })
-  }
 
   get user(){
     return this.authService.user;

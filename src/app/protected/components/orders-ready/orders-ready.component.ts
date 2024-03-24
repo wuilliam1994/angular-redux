@@ -34,7 +34,7 @@ export class OrdersReadyComponent {
   ngOnInit(): void {
     this.idHouse = localStorage.getItem('houseWorker')!;
     
-    // this.getMsg();
+    this.getMsg();
 
       this.consumedService.getAccountReady(this.idHouse).subscribe(ready => {
         
@@ -64,24 +64,24 @@ export class OrdersReadyComponent {
     }
   }
 
-  // getMsg() {
-  //   this.socketService.getMessage().subscribe(item => {
-  //     const objSocket = item as ISocket;
-  //     console.log(objSocket);      
+  getMsg() {
+    this.socketService.getMessage().subscribe(item => {
+      const objSocket = item as ISocket;
+      console.log(objSocket);      
       
-  //     if (objSocket.body.area === 1) {
+      if (objSocket.body.area === 1) {
 
-  //       Swal.fire({
-  //         position: "top-end",
-  //         icon: "info",
-  //         title: "Un orden se ha terminado en la cocina",
-  //         showConfirmButton: false,
-  //         timer: 1500
-  //       });
-  //         this.consumedService.getAccountReady(this.idHouse).subscribe(ready => {
-  //           this.ordersReady =  ready?.data.pending.length !== 0 ? ready?.data.pending! : []; 
-  //         })
-  //     }
-  //   })
-  // }
+        Swal.fire({
+          position: "top-end",
+          icon: "info",
+          title: "Un orden se ha terminado en la cocina",
+          showConfirmButton: false,
+          timer: 1500
+        });
+          this.consumedService.getAccountReady(this.idHouse).subscribe(ready => {
+            this.ordersReady =  ready?.data.pending.length !== 0 ? ready?.data.pending! : []; 
+          })
+      }
+    })
+  }
 }

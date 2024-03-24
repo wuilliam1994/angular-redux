@@ -32,7 +32,7 @@ export class KitchenComponent implements OnInit {
     
     this.idHouse = localStorage.getItem('houseWorker')!;
     
-    // this.getMsg();
+    this.getMsg();
     
     this.consumedService.getConsumedPending(this.idHouse).subscribe(pending => {
       this.kitchenPending =  pending?.data.pending.length !== 0 ? pending?.data.pending! : [];
@@ -45,7 +45,6 @@ export class KitchenComponent implements OnInit {
     const objSen = {
       area: 1,
     }
-
     this.socketService.sendMessage(objSen);
   }
 
@@ -71,27 +70,27 @@ export class KitchenComponent implements OnInit {
     }
   }
 
-  // getMsg() {
-  //   this.socketService.getMessage().subscribe(item => {
-  //     const objSocket = item as ISocket;
+  getMsg() {
+    this.socketService.getMessage().subscribe(item => {
+      const objSocket = item as ISocket;
       
-  //     if (objSocket.body.area === 2) {
+      if (objSocket.body.area === 2) {
 
-  //       Swal.fire({
-  //         position: "top-end",
-  //         icon: "info",
-  //         title: "Un nuevo pedido se ha tomado",
-  //         showConfirmButton: false,
-  //         timer: 1500
-  //       });
+        Swal.fire({
+          position: "top-end",
+          icon: "info",
+          title: "Un nuevo pedido se ha tomado",
+          showConfirmButton: false,
+          timer: 1500
+        });
 
-  //       this.consumedService.getConsumedPending(this.idHouse).subscribe(pending => {
-  //         this.kitchenPending =  pending?.data.pending.length !== 0 ? pending?.data.pending! : []; 
-  //       })
+        this.consumedService.getConsumedPending(this.idHouse).subscribe(pending => {
+          this.kitchenPending =  pending?.data.pending.length !== 0 ? pending?.data.pending! : []; 
+        })
 
-  //     }
-  //   })
-  // }
+      }
+    })
+  }
 
  
 
