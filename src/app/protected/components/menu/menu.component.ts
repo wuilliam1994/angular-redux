@@ -205,7 +205,6 @@ export class MenuComponent implements OnInit {
 
                       const menuString = JSON.stringify(menuDelete.body?.data['menu']);
                       const test: Menu = JSON.parse(menuString)
-                      console.log(this.listMenu);
                       
                       // this.listMenu = this.listMenu.filter(
                       //   (menu) => menu._id !== test._id

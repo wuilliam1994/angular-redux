@@ -34,7 +34,6 @@ constructor( private router: Router){}
   ngOnInit() {
     this.data.subscribe((resp) => {
       if (resp.length) {
-        // console.log(resp[0].hasOwnProperty('product'));
         this.dataSource.data = resp;
       }
     });
@@ -54,7 +53,6 @@ constructor( private router: Router){}
 
   deleteElement(element: any) {
     this.delete.emit(element);
-    // console.log(element);
   }
 
   nextElement(element: any){

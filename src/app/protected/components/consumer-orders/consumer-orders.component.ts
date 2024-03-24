@@ -47,7 +47,6 @@ export class ConsumerOrdersComponent implements OnInit {
   searchMenu() {
     this.takeOrdersService.getFoodMenu(this.idHouse,  this.idTable).subscribe(item => {
       this.menuList = item?.data.menu!;
-      console.log(this.menuList);
       
     });
   }
@@ -93,7 +92,6 @@ export class ConsumerOrdersComponent implements OnInit {
 
   openTake(idAccount: string) {
     //"/:house/:table/:account/consumed/insert"
-    console.log(this.productsSelected);
     
     const productsSelected = this.productsSelected.filter(item => item.cant !== 0);
 

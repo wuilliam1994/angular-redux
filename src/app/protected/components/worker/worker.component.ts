@@ -72,8 +72,6 @@ export class WorkerComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log(result);
-        console.log(result['Contraseña']);
         
         let element = {
           username: result['Nombre de Usuario'],

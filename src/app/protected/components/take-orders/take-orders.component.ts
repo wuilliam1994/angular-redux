@@ -52,8 +52,6 @@ export class TakeOrdersComponent implements OnInit {
     this.tableSelected = target.value;
     this.takeOrdersService.getFoodMenu(this.idHouse, target.value).subscribe(item => {
       this.menuList = item?.data.menu!;
-      console.log(this.menuList);
-      
     });
   }
 
@@ -121,7 +119,6 @@ export class TakeOrdersComponent implements OnInit {
     // }
     //aqui va lo que se va a consumir
 
-    console.log(this.productsSelected);
     
     const productsSelected = this.productsSelected.filter(item => item.cant !== 0);
 

@@ -43,7 +43,6 @@ export class HouseComponent implements OnInit {
   }
 
   onDelete(element: House) {
-    console.log(this.houseDataService.getListHouse);
 
     Swal.fire({
       title: 'Are you sure?',

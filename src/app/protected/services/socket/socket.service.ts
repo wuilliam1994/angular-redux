@@ -10,6 +10,8 @@ import { ISocket } from '../../interfaces/socket.interface';
 export class SocketService {
   houseWorker = '';
   constructor(private socket: Socket) {
+    console.log(this.houseWorker, 'houseWorker en socket service');
+    
     this.houseWorker = localStorage.getItem('houseWorker')!;
     this.socket.emit('join_room', this.houseWorker)
   }

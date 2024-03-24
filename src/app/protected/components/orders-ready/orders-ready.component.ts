@@ -45,7 +45,6 @@ export class OrdersReadyComponent {
 
   deletedElement(pending : Pending) {
     const idAccounts = pending.account.product.map(element => element.menuProduct._id);
-    console.log(idAccounts);
     
     this.consumedService.setAccountInTable(pending.account, this.idHouse, idAccounts).subscribe({
       next: (resp)=> {        
@@ -67,7 +66,6 @@ export class OrdersReadyComponent {
   getMsg() {
     this.socketService.getMessage().subscribe(item => {
       const objSocket = item as ISocket;
-      console.log(objSocket);      
       
       if (objSocket.body.area === 1) {
 
