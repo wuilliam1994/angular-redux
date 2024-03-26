@@ -7,7 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 import { EffectsModule } from '@ngrx/effects';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
+// const config: SocketIoConfig = { url: environment.baseDirectorySocket, options: {} };
 const config: SocketIoConfig = { url: environment.baseDirectorySocket, options: {} };
 @NgModule({
   declarations: [
