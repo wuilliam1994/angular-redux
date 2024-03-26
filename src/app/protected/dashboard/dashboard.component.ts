@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   onResize(event: Event): void {
     this.showMenu = window.innerWidth < 1000;
   }
-  constructor(private authService: AuthService, private socketService: SocketService){
+  constructor(private authService: AuthService){
 
   }
 
