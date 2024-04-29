@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { House } from '../../interfaces/house.interface';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
@@ -19,6 +19,7 @@ export class DataTableComponent implements OnInit {
   @Output() generate = new EventEmitter<any>();
 
   @Input() data!: Observable<any[]>;
+  @Input() class!: string[];
   @Input() listHeaders: any;
   @Input() link!: string;
   @Input() showNexts: boolean = false;
@@ -28,16 +29,19 @@ export class DataTableComponent implements OnInit {
   objectKeys = Object.keys;
   dataSource = new MatTableDataSource<House>();
   baseUrlImage = environment.baseDirectoryImage;
+  numElements: number = 0;
   
 constructor( private router: Router){}
 
   ngOnInit() {
+    console.log(this.listHeaders);
+    this.numElements = Object.keys(this.listHeaders).length;
+    
     this.data.subscribe((resp) => {
       if (resp.length) {
         this.dataSource.data = resp;
       }
     });
-    
   }
   ngAfterViewInit() {
       this.dataSource.paginator = this.paginator;

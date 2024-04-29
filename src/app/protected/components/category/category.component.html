@@ -1,5 +1,5 @@
 <div class="containerCategory">
-  <mat-toolbar id="matToolbarCategory">
+  <mat-toolbar class="matToolbarCategory">
     <span>Category</span>
     <span class="spacer"></span>
     <!-- 
@@ -40,6 +40,7 @@
 
   <app-data-table
     [data]="categoryDataService.getListCategory"
+    [class]="['','','']"
     [listHeaders]="columnHeader"
     (edit)="onEdit($event)"
     (delete)="onDelete($event)"

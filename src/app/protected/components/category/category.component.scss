@@ -4,7 +4,7 @@
   margin-top: 0.5%;
 }
 
-#matToolbarCategory {
+.matToolbarCategory {
   border-radius: 5px;
 }
 
@@ -33,5 +33,25 @@ select {
     font-size: 14px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
+
+@media (max-width: 768px) {
+
+  .matToolbarCategory {
+    height: 85px;
+  }
+
+  ::ng-deep .mat-toolbar-single-row span:first-child {
+    display: block;
+    padding: 5px 0px;
+  }
+  
+  :host ::ng-deep .mat-toolbar-single-row {
+    display: block;
+  }
+  select {
+    width: 152px;
+  }
+}
+
 
 

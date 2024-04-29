@@ -1,36 +1,112 @@
 <div class="mat-elevation-z8 demo-table">
   <mat-form-field>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Filtro">
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" />
   </mat-form-field>
   <table mat-table [dataSource]="dataSource" matSort>
-    <ng-container [matColumnDef]="tableData" *ngFor="let tableData of objectKeys(listHeaders); let $index">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{listHeaders[tableData]}}    </th>
-      <td mat-cell *matCellDef="let element">
-        <span *ngIf="listHeaders[tableData] !== 'Foto'">{{element[tableData] }}</span>
+    <ng-container
+      [matColumnDef]="tableData"
+      *ngFor="let tableData of objectKeys(listHeaders); let i = index"
+    >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="class[i]">
+      <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header> -->
+        {{ listHeaders[tableData] }}
+      </th>
+      <td mat-cell *matCellDef="let element" [ngClass]="class[i]">
+      <!-- <td mat-cell *matCellDef="let element"> -->
+        <span *ngIf="listHeaders[tableData] !== 'Foto'">{{
+          element[tableData]
+        }}</span>
         <ng-container *ngIf="listHeaders[tableData] === 'Foto'">
-          <img [src]="baseUrlImage + element[$index]" alt="">
+          <img [src]="baseUrlImage + element[i]" alt="" />
         </ng-container>
-        
-        <!-- <span *ngIf="listHeaders[tableData] === 'Foto'">{{element[$index] }}</span> -->
-        </td>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
       <td mat-cell *matCellDef="let row">
-        <button *ngIf="btnEdit" mat-raised-button matTooltip="Editar" matTooltipClass="mat-tooltip" (click)="editElement(row)">Editar</button>
-        <button mat-raised-button matTooltip="Eliminar" matTooltipClass="mat-tooltip" (click)="deleteElement(row)">Eliminar</button>
-        <button *ngIf="showNexts" mat-raised-button matTooltip="Siguiente" matTooltipClass="mat-tooltip" (click)="nextElement(row)" >Siguiente</button>
-        <button *ngIf="generateQr" mat-raised-button matTooltip="Generar QR" matTooltipClass="mat-tooltip" (click)="generarQr(row._id)" >Generar QR</button>
+        <button
+        mat-mini-fab
+        *ngIf="btnEdit"
+        matTooltip="Editar"
+        (click)="editElement(row)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-mini-fab
+          matTooltip="Eliminar"
+          (click)="deleteElement(row)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button
+          mat-mini-fab
+          *ngIf="showNexts"
+          matTooltip="Siguiente"
+          (click)="nextElement(row)"
+        >
+          <mat-icon>arrow_forward_ios</mat-icon>
+        </button>
+        <button
+          mat-mini-fab
+          *ngIf="generateQr"
+          mat-raised-button
+          matTooltip="Generar QR"
+          matTooltipClass="mat-tooltip"
+          (click)="generarQr(row._id)"
+        >
+          <mat-icon>qr_code_2_add</mat-icon>
+        </button>
+        <!-- <button
+          *ngIf="btnEdit"
+          mat-raised-button
+          matTooltip="Editar"
+          matTooltipClass="mat-tooltip"
+          (click)="editElement(row)"
+        >
+          Editar
+        </button> -->
+        <!-- <button
+          mat-raised-button
+          matTooltip="Eliminar"
+          matTooltipClass="mat-tooltip"
+          (click)="deleteElement(row)"
+        >
+          Eliminar
+        </button> -->
+        <!-- <button
+        
+        >
+          Siguiente
+        </button>
+        <button
+          *ngIf="generateQr"
+          mat-raised-button
+          matTooltip="Generar QR"
+          matTooltipClass="mat-tooltip"
+          (click)="generarQr(row._id)"
+        >
+          Generar QR
+        </button> -->
       </td>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="objectKeys(listHeaders).concat('actions')"></tr>
-    <tr mat-row *matRowDef="let row; columns: objectKeys(listHeaders).concat('actions');"></tr>
+    <tr
+      mat-header-row
+      *matHeaderRowDef="objectKeys(listHeaders).concat('actions')"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: objectKeys(listHeaders).concat('actions')"
+    ></tr>
   </table>
   <div class="paginator">
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
       showFirstLastButtons
-      aria-label="Seleccionar página de elementos periódicos">
+      class="paginatorTest"
+      aria-label="Seleccionar página de elementos periódicos"
+    >
     </mat-paginator>
   </div>
 </div>

@@ -29,6 +29,7 @@
   
     <app-data-table
       [data]="menuDataService.getListMenu"
+      [class]="['','','','showLarge']"
       [listHeaders]="columnHeader"
       (edit)="onEdit($event)"
       (delete)="onDelete($event)"

@@ -18,14 +18,8 @@ import Swal from 'sweetalert2';
 
 })
 export class DashboardComponent implements OnInit {
-  showMenu = false;
   access?: boolean;
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    this.showMenu = window.innerWidth < 1000;
-  }
   constructor(private authService: AuthService){
-
   }
 
   ngOnInit(): void {

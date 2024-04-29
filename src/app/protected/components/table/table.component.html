@@ -14,6 +14,7 @@
 
   <app-data-table
     [data]="tableDataService.getListTable"
+    [class]="['','showMedium']"
     [listHeaders]="columnHeader"
     [generateQr] ="true"
     (edit)="onEdit($event)"

@@ -18,3 +18,23 @@ button {
   font-weight: bold;
 }
 
+.btnMenuButton {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navMenu {
+    display: none;
+  }
+
+  .mat-toolbar-single-row {
+    padding-left: 15vw;
+  }
+
+  .btnMenuButton {
+    display: block;
+    position: absolute;
+    left: 0px;
+  }
+}
+
