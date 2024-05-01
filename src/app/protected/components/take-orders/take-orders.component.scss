@@ -33,16 +33,33 @@
     margin-bottom: 10px;
 }
 
+.mat-expansion-panel-header {
+  min-width: 539px;
+}
+
+.mat-expansion-panel {
+  overflow-x: auto;
+}
+
 .select-container {
   display: flex;
   justify-content: end;
 }
 
-.claseTest {
+.classRow {
   display: flex;
   justify-content: space-between;
 }
 
+.classRow>p:first-child {
+  width: 16%;
+  min-width: 155px;
+}
+.classRow>p:nth-child(2) {
+  width: 5%;
+  min-width: 148px;
+  justify-content: center;
+}
 mat-form-field {
   flex: 1; /* Para que ocupe el espacio restante */
 }
@@ -80,4 +97,16 @@ img {
   margin: 10px 25px;
   width: 60px;
   display: inline-block;
+}
+mat-panel-title {
+  min-width: 140px;
+}
+
+.containerEnd span {
+  margin-top: 5px;
+}
+@media (max-width: 768px) {
+  .classRow img {
+    display: none;
+  }
 }

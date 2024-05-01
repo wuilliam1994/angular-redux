@@ -47,6 +47,17 @@ img {
   font-size: 15px !important; 
 }
 
+::ng-deep td.mat-column-actions {
+  padding: 0px 16px 0px 0px;
+
+  .mat-mdc-tooltip-trigger {
+    width: 30px;
+  }
+
+  .material-icons {
+    font-size: 20px;
+  }
+}
 
 
 @media (max-width: 425px) {
@@ -61,6 +72,10 @@ img {
   ::ng-deep .mat-mdc-paginator-page-size-label, ::ng-deep .mat-mdc-paginator-page-size-select , ::ng-deep .mat-mdc-paginator-range-label {
     display: none !important;
   }
+
+  // ::ng-deep td.mat-column-actions {
+  //   display: none;
+  // }
 
 }
 

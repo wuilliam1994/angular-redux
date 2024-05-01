@@ -1,5 +1,5 @@
 <div class="containerMenu">
-    <mat-toolbar id="matToolbarMenu">
+    <mat-toolbar class="matToolbarMenu">
       <span>Menu</span>
       <span class="spacer"></span>
    
@@ -29,7 +29,7 @@
   
     <app-data-table
       [data]="menuDataService.getListMenu"
-      [class]="['','','','showLarge']"
+      [class]="['','','showMedium','showLarge']"
       [listHeaders]="columnHeader"
       (edit)="onEdit($event)"
       (delete)="onDelete($event)"

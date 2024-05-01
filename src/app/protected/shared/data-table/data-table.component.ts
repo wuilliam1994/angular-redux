@@ -35,6 +35,7 @@ constructor( private router: Router){}
 
   ngOnInit() {
     console.log(this.listHeaders);
+    console.log(this.generateQr);
     this.numElements = Object.keys(this.listHeaders).length;
     
     this.data.subscribe((resp) => {

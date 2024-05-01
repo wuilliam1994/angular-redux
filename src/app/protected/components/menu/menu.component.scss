@@ -5,7 +5,7 @@
     margin-top: 0.5% ;
 }
 
-#matToolbarMenu {
+.matToolbarMenu {
     border-radius: 5px;
 }
 
@@ -23,3 +23,48 @@
     font-size: 14px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
+@media (max-width: 376px) {
+    :host ::ng-deep .mat-toolbar-single-row select, :host ::ng-deep .mat-toolbar-single-row button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 510px) {
+
+    .matToolbarMenu {
+        height: 190px;
+    }
+    :host ::ng-deep .mat-toolbar-single-row {
+        display: block;
+    }
+    :host ::ng-deep .mat-toolbar-single-row span:first-child {
+        display: block;
+        padding: 5px 0px;
+    }
+    :host ::ng-deep .mat-toolbar-single-row select {
+        display: block;
+        margin-top: 10px;
+    }
+    :host ::ng-deep .mat-toolbar-single-row button {
+        margin-top: 10px;
+    }
+}
+
+@media (min-width: 510px) and (max-width: 768px) {
+
+    .matToolbarMenu {
+      height: 85px;
+    }
+  
+    ::ng-deep .mat-toolbar-single-row span:first-child {
+      display: block;
+      padding: 5px 0px;
+    }
+    
+    :host ::ng-deep .mat-toolbar-single-row {
+      display: block;
+    }
+    select {
+      width: 152px;
+    }
+  }
