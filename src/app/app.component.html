@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<div class="container-app">
+    <div class="main-content">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="modal-content" *ngIf="isLoading$ | async">
+        <img src="../assets/img/Spinner.svg" alt="" />
+    </div>
+</div>
